@@ -20,6 +20,8 @@
    (quote
 	("6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "a041a61c0387c57bb65150f002862ebcfe41135a3e3425268de24200b82d6ec9" default)))
  '(global-auto-complete-mode t)
+ '(magit-diff-options nil)
+ '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
  '(markdown-command "/usr/local/bin/pandoc")
  '(menu-bar-mode nil)
@@ -47,6 +49,25 @@
 (require 'nxml-mode)
 (defun turn-on-white-space-mode () (whitespace-mode 1))
 (add-hook 'xml-mode-hook 'turn-on-white-space-mode)
+
+(require 'hideshow)
+(require 'sgml-mode)
+
+(add-to-list 'hs-special-modes-alist
+             '(nxml-mode
+               "<!--\\|<[^/>]*[^/]>"
+               "-->\\|</[^/>]*[^/]>"
+
+               "<!--"
+               sgml-skip-tag-forward
+               nil))
+
+
+
+(add-hook 'nxml-mode-hook 'hs-minor-mode)
+
+;; optional key bindings, easier than hs defaults
+(define-key nxml-mode-map (kbd "C-c h") 'hs-toggle-hiding)
 
 (add-to-list 'ac-modes 'csharp-mode)
 
@@ -113,7 +134,7 @@
 
 ;(global-set-key (kbd "TAB") 'company-complete)
 
-(global-set-key (kbd "C-c C-f") 'helm-projectile) ; helm-projectile to find file in projects
+
 
 
 (require 'smex) ; Not needed if you use package.el
@@ -188,7 +209,7 @@
 (require 'face-remap)
 (defvar highlight-focus:last-buffer nil)
 (defvar highlight-focus:cookie nil)
-(defvar highlight-focus:background "#3e3e35")
+(defvar highlight-focus:background "#2e2e25")
 (defvar highlight-focus:app-has-focus t)
 
 (defun highlight-focus:check ()
@@ -221,3 +242,15 @@
 (provide 'highlight-focus)
 
 ;;; highlight-focus.el ends here
+
+
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+
+
+(defun javascript-hook ()
+  (setq c-set-style "java"
+    indent-tabs-mode t))
+(add-hook 'js-mode-hook #'javascript-hook)
+
+(global-set-key (kbd "C-t") 'helm-projectile) ; helm-projectile to find file in projects

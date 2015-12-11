@@ -1,12 +1,23 @@
 (package-initialize)
 
+(setq exec-path (append "/usr/local/Cellar/aspell/0.60.6.1/bin/" exec-path))
+
 (add-to-list 'package-archives
              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
 
 
 (load-file ".emacs.d/reveal-in-finder.el")
 
+(load-file ".emacs.d/dired-details.el")
+
+(load-file ".emacs.d/fuse-snippets.el")
+(load-file ".emacs.d/fuse-project.el")
+(load-file ".emacs.d/fuse-utils.el")
+
 (fset 'yes-or-no-p 'y-or-n-p)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -25,9 +36,10 @@
  '(magit-use-overlays nil)
  '(markdown-command "/usr/local/bin/pandoc")
  '(menu-bar-mode nil)
+ '(monokai-high-contrast-mode-line t)
  '(nxml-child-indent 4)
  '(org-startup-indented t)
- '(org-startup-truncated nil)
+ '(org-startup-truncated t)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tool-bar-mode nil))
@@ -39,7 +51,7 @@
     mac-command-modifier 'meta
     x-select-enable-clipboard nil)
 
-(global-set-key "\C-x\C-b" 'buffer-menu)
+(global-set-key "\C-x\C-b" 'helm-buffers-list)
 
 ;; setup files ending in “.js” to open in js2-mode
 (add-to-list 'auto-mode-alist '("\\.uno\\'" . csharp-mode))
@@ -165,6 +177,9 @@
 (setq magit-auto-revert-mode nil)
 (setq magit-last-seen-setup-instructions "1.4.0")
 
+(require 'magit-gh-pulls)
+(add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
+
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
@@ -175,10 +190,6 @@
 (global-undo-tree-mode)
 
 (setq delete-by-moving-to-trash t)
-
-
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
 
 
 ;;; highlight-focus.el --- highlight the active buffer
@@ -254,3 +265,34 @@
 (add-hook 'js-mode-hook #'javascript-hook)
 
 (global-set-key (kbd "C-t") 'helm-projectile) ; helm-projectile to find file in projects
+
+
+(defun eshell-mode-hook-func ()
+  (setq eshell-path-env (concat "/usr/local/bin:" eshell-path-env))
+  (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
+  (define-key eshell-mode-map (kbd "M-s") 'other-window-or-split))
+
+(add-hook 'eshell-mode-hook 'eshell-mode-hook-func)
+
+(set-face-foreground 'font-lock-comment-face "light pink")
+
+
+(setq-default c-basic-offset 4)
+
+
+(eval-after-load "dired-aux"
+   '(add-to-list 'dired-compress-file-suffixes
+                 '("\\.zip\\'" ".zip" "unzip")))
+
+
+
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
+
+; ASPELL STUFF
+;; find aspell and hunspell automatically
+(setq ispell-program-name "aspell")
+(setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
+
+;ASPELL STUFF ^^^^^^^^^^^^

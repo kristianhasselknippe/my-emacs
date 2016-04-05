@@ -1,6 +1,6 @@
 (load-library "url-handlers")
 
-;(setq gnutls-trustfiles "C:/Users/hassel/emacs/gnutlspem/cacert.pem")
+;(setq gnutls-trustfiles "C:/Users/hassel/emacs/certs/cacert.pem")
 
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
@@ -11,9 +11,11 @@
 (package-initialize) ;; You might already have this line
 
 ;list the packages you want
-(setq package-list '(auto-complete dash s smex magit windmove undo-tree monokai-theme helm projectile markdown-mode csharp-mode popup popup-complete js2-mode mmm-mode json-mode))
+(setq package-list '(auto-complete s dash smex magit windmove undo-tree monokai-theme helm projectile markdown-mode csharp-mode popup popup-complete js2-mode mmm-mode json-mode rainbow-mode helm-projectile))
 
 
+(require 'cl)
+(require 'csharp-mode)
 
 
 
@@ -70,8 +72,11 @@
  '(custom-enabled-themes (quote (monokai)))
  '(custom-safe-themes
    (quote
-	("0c49a9e22e333f260126e4a48539a7ad6e8209ddda13c0310c8811094295b3a3" "b6f42c69cf96795c75b1e79e5cd8ca62f9f9a0cb07bf11d1e0b49f97785358f1" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "a041a61c0387c57bb65150f002862ebcfe41135a3e3425268de24200b82d6ec9" default)))
+	("6c62b1cd715d26eb5aa53843ed9a54fc2b0d7c5e0f5118d4efafa13d7715c56e" "38ba6a938d67a452aeb1dada9d7cdeca4d9f18114e9fc8ed2b972573138d4664" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "a041a61c0387c57bb65150f002862ebcfe41135a3e3425268de24200b82d6ec9" default)))
  '(global-auto-complete-mode t)
+ '(gnutls-trustfiles
+   (quote
+	("/etc/ssl/certs/ca-certificates.crt" "/etc/pki/tls/certs/ca-bundle.crt" "/etc/ssl/ca-bundle.pem" "/usr/ssl/certs/ca-bundle.crt" "C:/Users/hassel/emacs/certs/cacert.pem")))
  '(magit-diff-options nil)
  '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
@@ -85,14 +90,18 @@
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
-(global-linum-mode 1) ; display line numbers in margin. New in Emacs 23
+
+
+
+; Slow as fuck!
+;(global-linum-mode 1) ; display line numbers in margin. New in Emacs 23
 
 
 
 (global-set-key "\C-x\C-b" 'helm-buffers-list)
 
 
-;; setup files ending in �.js� to open in js2-mode
+;; setup files ending in ï¿½.jsï¿½ to open in js2-mode
 (add-to-list 'auto-mode-alist '("\\.uno\\'" . csharp-mode))
 (add-to-list 'auto-mode-alist '("\\.ux\\'" . nxml-mode))
 (setq default-tab-width 4)
@@ -120,13 +129,11 @@
 
 
 (require 'nxml-mode)
-(defun turn-on-white-space-mode () (whitespace-mode 1))
-
 (defun my-nxml-mode-inits ()
-  (turn-on-white-space-mode)
-  (auto-complete-mode))
+  (auto-complete-mode)
+  (rainbow-mode))
 
-(add-hook 'xml-mode-hook 'my-nxml-mode-inits)
+(add-hook 'nxml-mode-hook 'my-nxml-mode-inits)
 
 (require 'hideshow)
 (require 'sgml-mode)
@@ -143,11 +150,16 @@
 
 
 (add-hook 'nxml-mode-hook 'hs-minor-mode)
+(add-hook 'csharp-mode-hook 'hs-minor-mode)
+(add-hook 'js2-mode-hook 'hs-minor-mode)
+(add-hook 'json-mode-hook 'hs-minor-mode)
+(add-hook 'c++-mode-hook 'hs-minor-mode)
+(add-hook 'c-mode-hook 'hs-minor-mode)
 
 ;; optional key bindings, easier than hs defaults
 (define-key nxml-mode-map (kbd "C-c h") 'hs-toggle-hiding)
 
-(add-to-list 'ac-modes 'csharp-mode)
+;(add-to-list 'ac-modes 'csharp-mode)
 
 (defun set-auto-complete-as-completion-at-point-function ()
   (setq completion-at-point-functions '(auto-complete)))
@@ -196,7 +208,8 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(global-set-key (kbd "C-j") #'ace-jump-word-mode)
+(global-set-key (kbd "C-j") #'avy-goto-char-2)
+(global-set-key (kbd "M-g M-g") #'avy-goto-line)
 
 ;(setq ace-jump-mode-move-keys
 ;     (loop for i from ?a to ?z collect i))
@@ -307,7 +320,16 @@
     indent-tabs-mode t))
 (add-hook 'js-mode-hook #'javascript-hook)
 
-(global-set-key (kbd "C-t") 'helm-projectile) ; helm-projectile to find file in projects
+
+(setq projectile-keymap-prefix (kbd "C-c M-p"))
+(projectile-global-mode)
+(setq projectile-enable-caching t)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+(global-set-key (kbd "C-c t") 'helm-projectile-find-file) ; helm-projectile to find file in projects
+
+
+
 
 
 (defun eshell-mode-hook-func ()
@@ -428,8 +450,11 @@
 (define-key omnisharp-mode-map (kbd "C-c i") 'omnisharp-auto-complete)
 (define-key omnisharp-mode-map (kbd "C-c r") 'omnisharp-rename)
 (define-key omnisharp-mode-map (kbd "C-c g") 'omnisharp-go-to-definition)
+(define-key omnisharp-mode-map (kbd "C-c u") 'omnisharp-find-usages)
 (add-hook 'csharp-mode-hook 'omnisharp-mode)
 
+
+(setq omnisharp-server-executable-path "C:/Users/hassel/dev/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe")
 
 ;; Change default working dir to ~/dev
 ;(cd "C:/Users/hassel/dev")

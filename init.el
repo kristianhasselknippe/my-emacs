@@ -327,7 +327,8 @@
   (tide-setup)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (tide-hl-identifier-mode +1)
-  (electric-indent-local-mode 0))
+  (electric-indent-local-mode 0)
+  (company-mode +1))
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 (defun copy-from-osx ()

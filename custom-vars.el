@@ -1,4 +1,3 @@
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -8,7 +7,7 @@
  '(company-auto-complete-chars (quote (32 95 40 41 119 46 34 36 39 47)))
  '(company-frontends
    (quote
-	(company-pseudo-tooltip-fd\.rontend company-echo-metadata-frontend)))
+	(company-pseudo-tooltip-frontend company-echo-metadata-frontend)))
  '(company-minimum-prefix-length 2)
  '(company-require-match nil)
  '(cursor-type (quote bar))

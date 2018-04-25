@@ -331,8 +331,8 @@
 (use-package multiple-cursors
   :ensure t
   :config
-  (global-set-key (kbd "C-M-<up>") 'mc/mark-previous-lines)
-  (global-set-key (kbd "C-M-<down>") 'mc/mark-next-lines)
+  (global-set-key (kbd "C-S-p") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-S-n") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-x r t") 'mc/edit-lines))
 
 (custom-set-faces

@@ -1,17 +1,21 @@
 (require 'package)
-(package-initialize)
 
-(setq package-list '(auto-complete ac-cider flycheck hideshow sgml-mode auto-complete-config
+(setq package-list '(use-package auto-complete ac-cider flycheck hideshow sgml-mode auto-complete-config
 				   smex paredit-menu undo-tree highlight-focus dired-x graphviz-dot-mode
 				   nodejs-repl rust-mode browse-url flycheck-flow yaml-mode))
 
 (add-to-list 'package-archives
 			 '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives
-			 '("melpa" . "https://melpa.org/packages/") t);
+	     '("melpa" . "https://melpa.org/packages/") t);
 
-;(unless package-archive-contents
-;  (package-refresh-contents)
+(package-initialize)
+
+
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
 
 ; install the missing packages
@@ -143,16 +147,7 @@
 (use-package json-mode
   :mode ("\\.json\\'" "\\.unoproj'"))
 
-(defun eshell-mode-hook-func ()
-  (setq eshell-path-env (concat "/usr/local/bin:" eshell-path-env))
-  (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
-  (define-key eshell-mode-map (kbd "M-s") 'other-window-or-split))
-(add-hook 'eshell-mode-hook 'eshell-mode-hook-func)
-
-
-
 ;(load-file "~/.emacs.d/material-colors.el")
-
 
 (use-package undo-tree
   :config
@@ -289,6 +284,8 @@
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
+  (flycheck-mode +1)
+  (eldoc-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (tide-hl-identifier-mode +1)
   (electric-indent-local-mode 0)
@@ -436,7 +433,8 @@
 
 (add-hook 'eshell-mode-hook 'eshell-setup)
 
-(require 'cargo)
+(use-package cargo
+  :ensure t)
 (defun setup-cargo-rust-mode ()
   (define-key rust-mode-map (kbd "<f5>") #'cargo-process-build)
   (define-key rust-mode-map (kbd "M-<f5>") #'cargo-process-test)
@@ -510,6 +508,10 @@
     (set-char-table-range composition-function-table (car char-regexp)
                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
 (add-hook 'helm-major-mode-hook
+          (lambda ()
+            (setq auto-composition-mode nil)))
+
+(add-hook 'eshell-mode-hook
           (lambda ()
             (setq auto-composition-mode nil)))
 

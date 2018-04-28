@@ -1,14 +1,14 @@
 (require 'package)
 
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                    (not (gnutls-available-p))))
-       (proto (if no-ssl "http" "https")))
+					(not (gnutls-available-p))))
+	   (proto (if no-ssl "http" "https")))
   ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
   (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
   ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
   (when (< emacs-major-version 24)
-    ;; For important compatibility libraries like cl-lib
-    (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
+	;; For important compatibility libraries like cl-lib
+	(add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 
 
 (setq package-list '(use-package auto-complete ac-cider flycheck hideshow sgml-mode auto-complete-config
@@ -229,23 +229,51 @@
   :ensure t)
 
 
-;; OMNISHARP
-;(load-file "/Users/Hassel/.emacs.d/omnisharp-emacs/omnisharp.el")
-
-;(use-package omnisharp-mode
-;  :load-path "/Users/Hassel/.emacs.d/omnisharp-emacs/omnisharp.el"
-;  :config
-;  (setq omnisharp-server-executable-path "~/omnisharp-roslyn/artifacts/scripts/OmniSharp")
-;  :bind (:map omnisharp-mode-map
-;		 ("C-c c" . omnisharp-auto-complete)
-;		 ("C-c r" . omnisharp-rename)						  
-;		 ("C-c g" . omnisharp-go-to-definition)			  
-;		 ("C-c u" . omnisharp-find-usages)				  
-;		 ("C-c C-g" . omnisharp-navigate-to-solution-file)))
+(use-package omnisharp
+  :ensure t
+  :bind (:map omnisharp-mode-map
+			  ("C-c C-c" . omnisharp-auto-complete)
+			  ("C-c C-f" . omnisharp-run-code-action-refactoring)
+			  ("C-c f" . omnisharp-code-format-entire-file)
+			  ("C-c s" . omnisharp-helm-find-symbols)
+			  ("C-c C-d" . omnisharp-current-type-documentation)
+			  ("C-c r" . omnisharp-rename)
+			  ("C-c C-r" . omnisharp-helm-find-usages)
+			  ("M-." . omnisharp-go-to-definition)
+			  ("C-c C-g" . omnisharp-navigate-to-solution-file)))
 
 (use-package csharp-mode
   :ensure t
-  :mode (("\\.uno\\'" . csharp-mode)))
+  :mode ("\\.uno\\'" "\\.cs'"))
+
+(eval-after-load
+  'company
+  '(add-to-list 'company-backends #'company-omnisharp))
+
+(defun my-csharp-mode-setup ()
+  (unless omnisharp-server-executable-path
+	(message "You need to install the omnisharp server using M-x omnisharp-install-server"))
+
+  (omnisharp-mode)
+  (company-mode)
+  (flycheck-mode)
+
+  (setq indent-tabs-mode nil)
+  (setq c-syntactic-indentation t)
+  (c-set-style "ellemtel")
+  (setq c-basic-offset 4)
+  (setq truncate-lines t)
+  (setq tab-width 4)
+  (setq evil-shift-width 4)
+
+  ;csharp-mode README.md recommends this too
+  ;(electric-pair-mode 1)       ;; Emacs 24
+  ;(electric-pair-local-mode 1) ;; Emacs 25
+
+  (local-set-key (kbd "C-c r r") 'omnisharp-run-code-action-refactoring)
+  (local-set-key (kbd "C-c C-c") 'recompile))
+
+(add-hook 'csharp-mode-hook 'my-csharp-mode-setup t)
 
 (use-package haxe-mode
   :ensure t)
@@ -318,12 +346,10 @@
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx))
 
-
-
-
 (use-package helm-projectile
   :ensure t
   :config
+  (projectile-global-mode)
   (global-set-key (kbd "C-c t") 'helm-projectile-find-file))
 
 (require 'tramp)
@@ -421,9 +447,9 @@
 ;; http://iqbalansari.github.io/blog/2014/12/07/automatically-create-parent-directories-on-visiting-a-new-file-in-emacs/
 (defun my-create-non-existent-directory ()
   (let ((parent-directory (file-name-directory buffer-file-name)))
-    (when (and (not (file-exists-p parent-directory))
-               (y-or-n-p (format "Directory `%s' does not exist! Create it?" parent-directory)))
-      (make-directory parent-directory t))))
+	(when (and (not (file-exists-p parent-directory))
+			   (y-or-n-p (format "Directory `%s' does not exist! Create it?" parent-directory)))
+	  (make-directory parent-directory t))))
 
 (add-to-list 'find-file-not-found-functions 'my-create-non-existent-directory)
 
@@ -482,9 +508,9 @@
 
 ;; store all backup and autosave files in the tmp dir
 (setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
+	  `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+	  `((".*" ,temporary-file-directory t)))
 
 (use-package markdown-mode
   :ensure t
@@ -496,41 +522,41 @@
 (when (window-system)
   (set-frame-font "Fira Code"))
 (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
-               (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
-               (36 . ".\\(?:>\\)")
-               (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
-               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
-               (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
-               (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
-               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
-               (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
-               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
-               (48 . ".\\(?:x[a-zA-Z]\\)")
-               (58 . ".\\(?:::\\|[:=]\\)")
-               (59 . ".\\(?:;;\\|;\\)")
-               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
-               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
-               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
-               (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
-               (91 . ".\\(?:]\\)")
-               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
-               (94 . ".\\(?:=\\)")
-               (119 . ".\\(?:ww\\)")
-               (123 . ".\\(?:-\\)")
-               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
-               (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
-               )
-             ))
+			   (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+			   (36 . ".\\(?:>\\)")
+			   (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+			   (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+			   (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+			   (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+			   (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+			   (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+			   (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+			   (48 . ".\\(?:x[a-zA-Z]\\)")
+			   (58 . ".\\(?:::\\|[:=]\\)")
+			   (59 . ".\\(?:;;\\|;\\)")
+			   (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+			   (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+			   (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+			   (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+			   (91 . ".\\(?:]\\)")
+			   (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+			   (94 . ".\\(?:=\\)")
+			   (119 . ".\\(?:ww\\)")
+			   (123 . ".\\(?:-\\)")
+			   (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+			   (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
+			   )
+			 ))
   (dolist (char-regexp alist)
-    (set-char-table-range composition-function-table (car char-regexp)
-                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
+	(set-char-table-range composition-function-table (car char-regexp)
+						  `([,(cdr char-regexp) 0 font-shape-gstring]))))
 (add-hook 'helm-major-mode-hook
-          (lambda ()
-            (setq auto-composition-mode nil)))
+		  (lambda ()
+			(setq auto-composition-mode nil)))
 
 (add-hook 'eshell-mode-hook
-          (lambda ()
-            (setq auto-composition-mode nil)))
+		  (lambda ()
+			(setq auto-composition-mode nil)))
 
 ; Just for now to make it bigger on my large screen
 (when (> (x-display-pixel-width) 3000)
@@ -547,3 +573,19 @@
 
 (use-package nodejs-repl
   :ensure t)
+
+(defun locate-current-file-in-explorer ()
+  (interactive)
+  (cond
+   ;; In buffers with file name
+   ((buffer-file-name)
+	(shell-command (concat "start explorer /e,/select,\"" (replace-regexp-in-string "/" "\\\\" (buffer-file-name)) "\"")))
+   ;; In dired mode
+   ((eq major-mode 'dired-mode)
+	(shell-command (concat "start explorer /e,\"" (replace-regexp-in-string "/" "\\\\" (dired-current-directory)) "\"")))
+   ;; In eshell mode
+   ((eq major-mode 'eshell-mode)
+	(shell-command (concat "start explorer /e,\"" (replace-regexp-in-string "/" "\\\\" (eshell/pwd)) "\"")))
+   ;; Use default-directory as last resource
+   (t
+	(shell-command (concat "start explorer /e,\"" (replace-regexp-in-string "/" "\\\\" default-directory) "\"")))))

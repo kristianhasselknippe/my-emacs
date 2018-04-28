@@ -534,7 +534,7 @@
 
 ; Just for now to make it bigger on my large screen
 (when (> (x-display-pixel-width) 3000)
-  (set-face-attribute 'default nil :height 150))
+  (set-face-attribute 'default nil :height 120))
 
 (use-package expand-region
   :ensure t

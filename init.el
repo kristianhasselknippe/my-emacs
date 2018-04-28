@@ -1,13 +1,19 @@
 (require 'package)
 
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  (when (< emacs-major-version 24)
+    ;; For important compatibility libraries like cl-lib
+    (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
+
+
 (setq package-list '(use-package auto-complete ac-cider flycheck hideshow sgml-mode auto-complete-config
 				   smex paredit-menu undo-tree highlight-focus dired-x graphviz-dot-mode
 				   nodejs-repl rust-mode browse-url flycheck-flow yaml-mode))
-
-(add-to-list 'package-archives
-			 '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/") t);
 
 (package-initialize)
 
@@ -35,10 +41,6 @@
 
 (set-face-foreground 'font-lock-comment-face "light pink")
 (setq-default c-basic-offset 4)
-
-(setq mac-option-modifier nil
-	  mac-command-modifier 'meta
-	  x-select-enable-clipboard nil)
 
 (setq default-tab-width 4)
 
@@ -70,6 +72,10 @@
 (require 'use-package)
 
 (require 'cl)
+
+(use-package company
+  :ensure t
+  :hook (rust-mode racer-mode typescript-mode))
 
 (use-package nxml-mode
   :mode "\\.ux\\'"
@@ -302,8 +308,18 @@
 	  (process-send-string proc text)
 	  (process-send-eof proc))))
 
-(setq interprogram-cut-function 'paste-to-osx)
-(setq interprogram-paste-function 'copy-from-osx)
+
+
+(when (equal system-type "darwin")
+  (load-file ".emacs.d/reveal-in-finder.el")
+  (setq mac-option-modifier nil
+		mac-command-modifier 'meta
+		x-select-enable-clipboard nil)
+  (setq interprogram-cut-function 'paste-to-osx)
+  (setq interprogram-paste-function 'copy-from-osx))
+
+
+
 
 (use-package helm-projectile
   :ensure t
@@ -528,3 +544,6 @@
   :ensure t)
 
 ;(shell-command "npm install -g tsun")
+
+(use-package nodejs-repl
+  :ensure t)

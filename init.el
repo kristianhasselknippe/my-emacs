@@ -262,6 +262,7 @@
   :mode ("\\.ts\\'" "\\.tsx\\'")
   :bind (:map typescript-mode-map
 			  ("C-c C-f" . 'tide-fix)
+			  ("C-c f" . 'tide-format)
 			  ("C-c C-c" . 'company-complete)
 			  ("C-c C-d" . 'tide-documentation-at-point)
 			  ("C-c C-i" . 'tide-jump-to-implementation)
@@ -522,3 +523,8 @@
 (use-package expand-region
   :ensure t
   :config (global-set-key (kbd "C-@") 'er/expand-region))
+
+(use-package ts-comint
+  :ensure t)
+
+;(shell-command "npm install -g tsun")

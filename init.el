@@ -344,6 +344,8 @@
 	  (process-send-string proc text)
 	  (process-send-eof proc))))
 
+(use-package rainbow-mode
+  :ensure t)
 
 
 (when (string= system-type "darwin")
@@ -469,7 +471,7 @@
 (use-package avy-zap
   :ensure t)
 
-(define-key global-map (kbd "C-j") 'avy-goto-char)
+(define-key global-map (kbd "C-j") 'avy-goto-word-1)
 
 (use-package dart-mode
   :ensure t

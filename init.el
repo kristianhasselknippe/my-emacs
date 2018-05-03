@@ -148,7 +148,8 @@
 
 
 (use-package js2-mode
-  :mode "\\.js\\'")
+  :mode "\\.js\\'"
+  :ensure t)
 
 (use-package json-mode
   :mode ("\\.json\\'" "\\.unoproj'"))
@@ -285,27 +286,44 @@
   :ensure t
   :bind ("C-s" . swiper))
 
-;(use-package ripgrep
-;  :ensure t
-;  :bind ("C-M-s" . ripgrep-regexp))
+(use-package ripgrep
+  :ensure t)
 
 (global-set-key (kbd "C-M-s") 'vc-git-grep)
 
+(defun setup-tide-mode (mode-map)
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (eldoc-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (tide-hl-identifier-mode +1)
+  (electric-indent-local-mode 0)
+  (company-mode +1)
+
+  (define-key mode-map (kbd "C-c C-f") 'tide-fix)
+  (define-key mode-map (kbd "C-c f") 'tide-format)
+  (define-key mode-map (kbd "C-c C-c") 'company-complete)
+  (define-key mode-map (kbd "C-c C-d") 'tide-documentation-at-point)
+  (define-key mode-map (kbd "C-c C-i") 'tide-jump-to-implementation)
+  (define-key mode-map (kbd "C-c C-r") 'tide-references)
+  (define-key mode-map (kbd "C-c C-e") 'tide-project-errors)
+  (define-key mode-map (kbd "C-c r") 'tide-rename-symbol)
+  (define-key mode-map (kbd "<return>") 'newline-and-indent))
+
 (use-package typescript-mode
   :ensure t
-  :mode ("\\.ts\\'" "\\.tsx\\'")
-  :bind (:map typescript-mode-map
-			  ("C-c C-f" . 'tide-fix)
-			  ("C-c f" . 'tide-format)
-			  ("C-c C-c" . 'company-complete)
-			  ("C-c C-d" . 'tide-documentation-at-point)
-			  ("C-c C-i" . 'tide-jump-to-implementation)
-			  ("C-c C-r" . 'tide-references)
-			  ("C-c C-e" . 'tide-project-errors)
-			  ("C-c r" . 'tide-rename-symbol)
-			  ("<return>" . 'newline-and-indent)
-			  ("S-<left>" . 'indent-rigidly-left-to-tab-stop)
-			  ("S-<right>" . 'indent-rigidly-right-to-tab-stop)))
+  :mode ("\\.ts\\'" "\\.tsx\\'"))
+
+(use-package web-mode
+  :ensure t
+  :mode "\\.tsx\\'")
+
+(add-hook 'typescript-mode-hook (lambda () (setup-tide-mode typescript-mode-map)))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode web-mode-map))))
 
 (use-package restclient-mode
   :mode "\\.http\\'")
@@ -316,16 +334,6 @@
 (use-package tide
   :ensure t)
 
-(defun setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (eldoc-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (tide-hl-identifier-mode +1)
-  (electric-indent-local-mode 0)
-  (company-mode +1))
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 (defun copy-from-osx ()
   (shell-command-to-string "pbpaste"))
@@ -338,8 +346,8 @@
 
 
 
-(when (equal system-type "darwin")
-  (load-file ".emacs.d/reveal-in-finder.el")
+(when (string= system-type "darwin")
+  (load-file "./reveal-in-finder.el")
   (setq mac-option-modifier nil
 		mac-command-modifier 'meta
 		x-select-enable-clipboard nil)

@@ -152,7 +152,8 @@
   :ensure t)
 
 (use-package json-mode
-  :mode ("\\.json\\'" "\\.unoproj'"))
+  :mode ("\\.json\\'" "\\.unoproj'")
+  :ensure t)
 
 ;(load-file "~/.emacs.d/material-colors.el")
 
@@ -188,7 +189,11 @@
 			  ("C-c C-r" . 'xref-find-references))
   :init
   (setq rust-format-on-save t))
+
 (use-package lsp-mode)
+
+;;(use-package lsp-ui
+;;  :ensure t)
 
 (add-to-list 'load-path "~/lsp-rust/")
 (load "lsp-rust")
@@ -309,7 +314,8 @@
   (define-key mode-map (kbd "C-c C-r") 'tide-references)
   (define-key mode-map (kbd "C-c C-e") 'tide-project-errors)
   (define-key mode-map (kbd "C-c r") 'tide-rename-symbol)
-  (define-key mode-map (kbd "<return>") 'newline-and-indent))
+  (define-key mode-map (kbd "<return>") 'newline-and-indent)
+  (define-key mode-map (kbd "C-c i") 'helm-imenu))
 
 (use-package typescript-mode
   :ensure t
@@ -349,7 +355,7 @@
 
 
 (when (string= system-type "darwin")
-  (load-file "./reveal-in-finder.el")
+  (load-file "~/.emacs.d/reveal-in-finder.el")
   (setq mac-option-modifier nil
 		mac-command-modifier 'meta
 		x-select-enable-clipboard nil)

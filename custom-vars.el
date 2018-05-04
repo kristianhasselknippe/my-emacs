@@ -35,7 +35,7 @@
  '(org-startup-truncated t)
  '(package-selected-packages
    (quote
-	(edit-color-stamp web-mode omnisharp omnisharp-mode ts-comint expand-region wgrep ht reveal-in-osx-finder glsl-mode cargo dart-mode magit avy-zap uniquify ace-window tide counsel typescript-mode haxe-mode monokai swiper editorconfig edebug-x company-lsp imenu-anywhere lsp-mode use-package realgud yasnippet yaml-mode windata websocket undo-tree tree-mode toml-mode tabbar-ruler subatomic-theme spotify smex smart-mode-line slime shut-up ripgrep rainbow-mode popup-complete pdf-tools paredit-menu paredit-everywhere ov nodejs-repl neotree multiple-cursors multi monokai-theme mmm-mode minimap markdown-mode magit-gitflow magit-gh-pulls lua-mode lorem-ipsum json-mode js2-mode jdee irony helm-projectile graphviz-dot-mode fsharp-mode flycheck-rust flycheck-flow exec-path-from-shell emms el-get dash-functional cuda-mode csharp-mode avy adaptive-wrap ace-jump-mode ac-racer ac-ispell ac-cider)))
+	(lsp-ui edit-color-stamp web-mode omnisharp omnisharp-mode ts-comint expand-region wgrep ht reveal-in-osx-finder glsl-mode cargo dart-mode magit avy-zap uniquify ace-window tide counsel typescript-mode haxe-mode monokai swiper editorconfig edebug-x company-lsp imenu-anywhere lsp-mode use-package realgud yasnippet yaml-mode windata websocket undo-tree tree-mode toml-mode tabbar-ruler subatomic-theme spotify smex smart-mode-line slime shut-up ripgrep rainbow-mode popup-complete pdf-tools paredit-menu paredit-everywhere ov nodejs-repl neotree multiple-cursors multi monokai-theme mmm-mode minimap markdown-mode magit-gitflow magit-gh-pulls lua-mode lorem-ipsum json-mode js2-mode jdee irony helm-projectile graphviz-dot-mode fsharp-mode flycheck-rust flycheck-flow exec-path-from-shell emms el-get dash-functional cuda-mode csharp-mode avy adaptive-wrap ace-jump-mode ac-racer ac-ispell ac-cider)))
  '(projectile-globally-ignored-directories
    (quote
 	(".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "node_modules" "Pods")))
@@ -44,6 +44,7 @@
 	("rebar.config" "project.clj" "build.boot" "SConstruct" "pom.xml" "build.sbt" "gradlew" "build.gradle" ".ensime" "Gemfile" "requirements.txt" "setup.py" "tox.ini" "composer.json" "Cargo.toml" "mix.exs" "stack.yaml" "info.rkt" "DESCRIPTION" "TAGS" "GTAGS" "*.unoproj")))
  '(ring-bell-function (quote ignore))
  '(ripgrep-arguments (quote ("-i")))
+ '(rustup-executable rustup)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tide-allow-popup-select (quote (code-fix jump-to-implementation refactor)))

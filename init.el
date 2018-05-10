@@ -86,6 +86,11 @@
   :config
   (add-hook 'nxml-mode-hook #'rainbow-mode))
 
+(use-package asm-mode
+  :mode "\\.as\\'"
+  :bind (:map asm-mode-map
+			  ("<f5>" . #'compile)))
+
 (use-package smex
   :ensure t
   :bind ("M-x" . 'smex))
@@ -609,3 +614,7 @@
    ;; Use default-directory as last resource
    (t
 	(shell-command (concat "start explorer /e,\"" (replace-regexp-in-string "/" "\\\\" default-directory) "\"")))))
+
+
+;;Delete region when typing
+(delete-selection-mode 1)

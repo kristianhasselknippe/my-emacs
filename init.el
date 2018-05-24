@@ -73,9 +73,9 @@
 
 (require 'cl)
 
+
 (use-package company
-  :ensure t
-  :hook (rust-mode racer-mode typescript-mode))
+  :ensure t)
 
 (use-package nxml-mode
   :mode "\\.ux\\'"
@@ -303,7 +303,6 @@
   (eldoc-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (tide-hl-identifier-mode +1)
-  (electric-indent-local-mode 0)
   (company-mode +1)
 
   (define-key mode-map (kbd "C-c C-f") 'tide-fix)
@@ -314,7 +313,6 @@
   (define-key mode-map (kbd "C-c C-r") 'tide-references)
   (define-key mode-map (kbd "C-c C-e") 'tide-project-errors)
   (define-key mode-map (kbd "C-c r") 'tide-rename-symbol)
-  (define-key mode-map (kbd "<return>") 'newline-and-indent)
   (define-key mode-map (kbd "C-c i") 'helm-imenu))
 
 (use-package typescript-mode

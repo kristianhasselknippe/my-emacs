@@ -36,6 +36,10 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq delete-by-moving-to-trash t)
 
+(menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1)
+
 (use-package monokai-theme
   :ensure t)
 
@@ -81,6 +85,11 @@
   :mode "\\.ux\\'"
   :config
   (add-hook 'nxml-mode-hook #'rainbow-mode))
+
+(use-package asm-mode
+  :mode "\\.as\\'"
+  :bind (:map asm-mode-map
+			  ("<f5>" . #'compile)))
 
 (use-package smex
   :ensure t
@@ -603,3 +612,7 @@
    ;; Use default-directory as last resource
    (t
 	(shell-command (concat "start explorer /e,\"" (replace-regexp-in-string "/" "\\\\" default-directory) "\"")))))
+
+
+;;Delete region when typing
+(delete-selection-mode 1)

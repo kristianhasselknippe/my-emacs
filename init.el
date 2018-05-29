@@ -535,6 +535,11 @@
   :ensure t
   :mode ("\\.md\\'"))
 
+(defun my-markdown-mode-setup ()
+  (define-key markdown-mode-map (kbd "M-p") 'ace-window))
+
+(add-hook 'markdown-mode-hook #'my-markdown-mode-setup)
+
 (when (fboundp 'mac-auto-operator-composition-mode)
   (mac-auto-operator-composition-mode))
 

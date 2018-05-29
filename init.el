@@ -11,7 +11,7 @@
 	(add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 
 
-(setq package-list '(use-package auto-complete ac-cider flycheck hideshow sgml-mode auto-complete-config
+(setq package-list '(use-package auto-complete ac-cider flycheck hideshow sgml-mode auto-complete-config company
 				   smex paredit-menu undo-tree highlight-focus dired-x graphviz-dot-mode
 				   nodejs-repl rust-mode browse-url flycheck-flow yaml-mode))
 
@@ -76,10 +76,6 @@
 (require 'use-package)
 
 (require 'cl)
-
-
-(use-package company
-  :ensure t)
 
 (use-package nxml-mode
   :mode "\\.ux\\'"

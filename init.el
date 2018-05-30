@@ -300,6 +300,12 @@
   :ensure t)
 
 (global-set-key (kbd "C-M-s") 'rg)
+(global-set-key (kbd "C-M-f") 'rg-dwim)
+
+(defun my-rg-mode-setup ()
+  (define-key rg-mode-map (kbd "M-p") 'ace-window))
+
+(add-hook 'rg-mode-hook #'my-rg-mode-setup)
 
 (defun setup-tide-mode (mode-map)
   (interactive)

@@ -299,13 +299,23 @@
 (use-package rg
   :ensure t)
 
+(defun display-buffer-same-window-override (buffer alist)
+    (window--display-buffer buffer (selected-window) 'reuse alist))
+
+(defun compile-goto-error-same-window ()
+  (interactive)
+  (let ((display-buffer-overriding-action '(display-buffer-same-window-override)))
+    (compile-goto-error)))
+
+(defun my-rg-mode-setup ()
+  (define-key rg-mode-map (kbd "M-p") 'ace-window)
+  (define-key rg-mode-map (kbd "<C-return>") 'compile-goto-error-same-window))
+
+(add-hook 'rg-mode-hook #'my-rg-mode-setup)
+
 (global-set-key (kbd "C-M-s") 'rg)
 (global-set-key (kbd "C-M-f") 'rg-dwim)
 
-(defun my-rg-mode-setup ()
-  (define-key rg-mode-map (kbd "M-p") 'ace-window))
-
-(add-hook 'rg-mode-hook #'my-rg-mode-setup)
 
 (defun setup-tide-mode (mode-map)
   (interactive)

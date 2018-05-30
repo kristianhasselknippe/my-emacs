@@ -296,10 +296,10 @@
   :ensure t
   :bind ("C-s" . swiper))
 
-(use-package ripgrep
+(use-package rg
   :ensure t)
 
-(global-set-key (kbd "C-M-s") 'vc-git-grep)
+(global-set-key (kbd "C-M-s") 'rg)
 
 (defun setup-tide-mode (mode-map)
   (interactive)

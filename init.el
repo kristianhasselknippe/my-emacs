@@ -262,6 +262,7 @@
   '(add-to-list 'company-backends #'company-omnisharp))
 
 (defun my-csharp-mode-setup ()
+  (dotnet-mode)
   (unless omnisharp-server-executable-path
 	(message "You need to install the omnisharp server using M-x omnisharp-install-server"))
 
@@ -275,14 +276,7 @@
   (setq c-basic-offset 4)
   (setq truncate-lines t)
   (setq tab-width 4)
-  (setq evil-shift-width 4)
-
-  ;csharp-mode README.md recommends this too
-  ;(electric-pair-mode 1)       ;; Emacs 24
-  ;(electric-pair-local-mode 1) ;; Emacs 25
-
-  (local-set-key (kbd "C-c r r") 'omnisharp-run-code-action-refactoring)
-  (local-set-key (kbd "C-c C-c") 'recompile))
+  (setq evil-shift-width 4))
 
 (add-hook 'csharp-mode-hook 'my-csharp-mode-setup t)
 
@@ -601,6 +595,8 @@
 ; Just for now to make it bigger on my large screen
 (when (> (x-display-pixel-width) 3000)
   (set-face-attribute 'default nil :height 120))
+(when (equal (x-display-pixel-width) 2560)
+  (set-face-attribute 'default nil :height 140))
 
 (use-package expand-region
   :ensure t

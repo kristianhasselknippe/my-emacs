@@ -87,6 +87,10 @@
   :bind (:map asm-mode-map
 			  ("<f5>" . #'compile)))
 
+(use-package fsharp-mode
+  :ensure t
+  :mode "\\.fs\\'")
+
 (use-package smex
   :ensure t
   :bind ("M-x" . 'smex))

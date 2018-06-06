@@ -255,6 +255,7 @@
   :ensure t
   :bind (:map omnisharp-mode-map
 			  ("C-c C-c" . omnisharp-auto-complete)
+			  ("C-c C-e" . omnisharp-solution-errors)
 			  ("C-c C-f" . omnisharp-run-code-action-refactoring)
 			  ("C-c f" . omnisharp-code-format-entire-file)
 			  ("C-c s" . omnisharp-helm-find-symbols)

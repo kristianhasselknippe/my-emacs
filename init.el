@@ -610,3 +610,6 @@
 
 ;;Delete region when typing
 (delete-selection-mode 1)
+
+(use-package neotree
+  :ensure t)

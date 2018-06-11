@@ -575,6 +575,10 @@
 (when (equal (x-display-pixel-width) 2560)
   (set-face-attribute 'default nil :height 140))
 
+
+(when (and (string= system-type "darwin") (> (x-display-pixel-width) 3000))
+  (set-face-attribute 'default nil :height 150))
+
 (use-package expand-region
   :ensure t
   :config (global-set-key (kbd "C-@") 'er/expand-region))

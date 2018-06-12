@@ -356,8 +356,14 @@
             (when (string-equal "tsx" (file-name-extension buffer-file-name))
               (setup-tide-mode web-mode-map))))
 
-(use-package restclient-mode
-  :mode "\\.http\\'")
+(use-package restclient
+  :ensure t)
+
+(add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
+
+
+
+(add-to-list 'company-backends 'company-restclient)
 
 (use-package counsel
   :ensure t)

@@ -260,6 +260,7 @@
 			  ("C-c f" . omnisharp-code-format-entire-file)
 			  ("C-c s" . omnisharp-helm-find-symbols)
 			  ("C-c C-d" . omnisharp-current-type-documentation)
+			  ("C-c i" . omnisharp-find-implementations)
 			  ("C-c r" . omnisharp-rename)
 			  ("C-c C-r" . omnisharp-helm-find-usages)
 			  ("M-." . omnisharp-go-to-definition)
@@ -275,6 +276,7 @@
 
 (defun my-csharp-mode-setup ()
   (dotnet-mode)
+  (helm-mode)
   (unless omnisharp-server-executable-path
 	(message "You need to install the omnisharp server using M-x omnisharp-install-server"))
 

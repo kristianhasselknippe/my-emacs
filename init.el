@@ -113,6 +113,9 @@
   (magithub-feature-autoinject t)
   (setq magithub-clone-default-directory "~/"))
 
+(require 'magit-gitflow)
+(add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
+
 
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))

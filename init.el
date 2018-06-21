@@ -636,3 +636,13 @@
   ("t" org-todo "toggle todo"))
 
 (define-key org-mode-map (kbd "C-c C-v") 'hydra-org-mode/body)
+
+(use-package yasnippet
+  :ensure t)
+
+(yas-global-mode 1)
+
+(use-package yasnippet-snippets
+  :ensure t)
+
+(global-set-key (kbd "C-c <tab>") 'yas/insert-snippet)

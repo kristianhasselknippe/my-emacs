@@ -63,7 +63,7 @@
  '(org-startup-truncated t)
  '(package-selected-packages
    (quote
-	(company-restclient restclient restclient-mode magithub dotnet rg urlenc use-package ## helm helm-core ivy projectile company lsp-ui edit-color-stamp web-mode omnisharp omnisharp-mode ts-comint expand-region wgrep ht reveal-in-osx-finder glsl-mode cargo dart-mode magit avy-zap uniquify ace-window tide counsel typescript-mode haxe-mode monokai swiper editorconfig edebug-x company-lsp imenu-anywhere lsp-mode realgud yasnippet yaml-mode windata websocket undo-tree tree-mode toml-mode tabbar-ruler subatomic-theme spotify smex smart-mode-line slime shut-up ripgrep rainbow-mode popup-complete pdf-tools paredit-menu paredit-everywhere ov nodejs-repl neotree multiple-cursors multi monokai-theme mmm-mode minimap markdown-mode magit-gitflow magit-gh-pulls lua-mode lorem-ipsum json-mode js2-mode jdee irony helm-projectile graphviz-dot-mode fsharp-mode flycheck-rust flycheck-flow exec-path-from-shell emms el-get dash-functional cuda-mode csharp-mode avy adaptive-wrap ace-jump-mode ac-racer ac-ispell ac-cider)))
+	(yasnippet-snippets hydra company-restclient restclient restclient-mode magithub dotnet rg urlenc use-package ## helm helm-core ivy projectile company lsp-ui edit-color-stamp web-mode omnisharp omnisharp-mode ts-comint expand-region wgrep ht reveal-in-osx-finder glsl-mode cargo dart-mode magit avy-zap uniquify ace-window tide counsel typescript-mode haxe-mode monokai swiper editorconfig edebug-x company-lsp imenu-anywhere lsp-mode realgud yasnippet yaml-mode windata websocket undo-tree tree-mode toml-mode tabbar-ruler subatomic-theme spotify smex smart-mode-line slime shut-up ripgrep rainbow-mode popup-complete pdf-tools paredit-menu paredit-everywhere ov nodejs-repl neotree multiple-cursors multi monokai-theme mmm-mode minimap markdown-mode magit-gitflow magit-gh-pulls lua-mode lorem-ipsum json-mode js2-mode jdee irony helm-projectile graphviz-dot-mode fsharp-mode flycheck-rust flycheck-flow exec-path-from-shell emms el-get dash-functional cuda-mode csharp-mode avy adaptive-wrap ace-jump-mode ac-racer ac-ispell ac-cider)))
  '(projectile-globally-ignored-directories
    (quote
 	(".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "node_modules" "Pods")))
@@ -81,7 +81,7 @@
  '(tool-bar-mode nil)
  '(ts-comint-program-command "ts-node")
  '(typescript-auto-indent-flag nil)
- '(whitespace-line-column 200)
+ '(whitespace-line-column 20000)
  '(whitespace-style
    (quote
 	(face trailing tabs spaces lines empty indentation space-after-tab space-before-tab space-mark tab-mark))))
@@ -93,7 +93,7 @@
  '(lsp-face-highlight-textual ((t (:background "blue"))))
  '(whitespace-indentation ((t (:foreground "gray29" :weight bold))))
  '(whitespace-tab ((t (:foreground "gray31" :weight bold))))
- '(whitespace-trailing ((t (:foreground "red1" :inverse-video t)))))
+ '(whitespace-trailing ((t (:foreground "#59413d" :inverse-video t)))))
 
 
 (setq company-dabbrev-downcase 0)

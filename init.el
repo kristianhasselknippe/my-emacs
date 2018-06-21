@@ -636,6 +636,13 @@
   ("a" org-date-from-calendar "get date")
   ("t" org-todo "toggle todo"))
 
+(defhydra hydra-global (:color red)
+  "Quick access stuff"
+  ("r" omnisharp-reload-solution "Omnisharp reload solution")
+  ("s" omnisharp-start-omnisharp-server "Omnisharp start server"))
+
+(global-set-key (kbd "M-C-g") 'hydra-global/body)
+
 (use-package yasnippet
   :ensure t)
 

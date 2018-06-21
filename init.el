@@ -625,3 +625,14 @@
 
 (use-package neotree
   :ensure t)
+
+
+(use-package hydra
+  :ensure t)
+
+(defhydra hydra-org-mode (:color blue)
+  "Usefull stuff"
+  ("a" org-date-from-calendar "get date")
+  ("t" org-todo "toggle todo"))
+
+(define-key org-mode-map (kbd "C-c C-v") 'hydra-org-mode/body)

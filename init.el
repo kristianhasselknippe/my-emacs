@@ -488,7 +488,8 @@
 
 (defun my-org-mode-setup ()
   (define-key org-mode-map (kbd "M-p") 'ace-window)
-  (define-key org-mode-map (kbd "C-j") 'avy-goto-word-1))
+  (define-key org-mode-map (kbd "C-j") 'avy-goto-word-1)
+  (define-key org-mode-map (kbd "C-c C-v") 'hydra-org-mode/body))
 
 (add-hook 'org-mode-hook #'my-org-mode-setup)
 
@@ -634,8 +635,6 @@
   "Usefull stuff"
   ("a" org-date-from-calendar "get date")
   ("t" org-todo "toggle todo"))
-
-(define-key org-mode-map (kbd "C-c C-v") 'hydra-org-mode/body)
 
 (use-package yasnippet
   :ensure t)

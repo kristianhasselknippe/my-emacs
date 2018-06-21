@@ -487,6 +487,7 @@
 (setq org-src-fontify-natively t)
 
 (defun my-org-mode-setup ()
+  (define-key org-mode-map (kbd "M-p") 'ace-window)
   (define-key org-mode-map (kbd "C-j") 'avy-goto-word-1))
 
 (add-hook 'org-mode-hook #'my-org-mode-setup)

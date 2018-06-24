@@ -77,6 +77,10 @@
 
 (require 'cl)
 
+(use-package company
+  :ensure t
+  :hook (typescript-mode))
+
 (use-package nxml-mode
   :mode "\\.ux\\'"
   :config

@@ -91,6 +91,12 @@
   :ensure t
   :mode "\\.fs\\'")
 
+(defun my-fsharp-mode-setup ()
+  (define-key fsharp-mode-map (kbd "C-c C-c") #'fsharp-ac/complete-at-point)
+  (define-key fsharp-mode-map (kbd "M-p") #'ace-window))
+
+(add-hook 'fsharp-mode-hook #'my-fsharp-mode-setup)
+
 (use-package smex
   :ensure t
   :bind ("M-x" . 'smex))

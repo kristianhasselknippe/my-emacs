@@ -330,10 +330,6 @@
 
 (add-hook 'rg-mode-hook #'my-rg-mode-setup)
 
-(global-set-key (kbd "C-M-s") 'rg)
-(global-set-key (kbd "C-M-f") 'rg-dwim)
-
-
 (defun setup-tide-mode (mode-map)
   (interactive)
   (tide-setup)
@@ -378,6 +374,9 @@
 
 (use-package counsel
   :ensure t)
+
+(global-set-key (kbd "C-M-s") 'counsel-rg)
+(global-set-key (kbd "C-M-f") 'rg-project)
 
 (use-package tide
   :ensure t)

@@ -10,6 +10,7 @@
 	(company-pseudo-tooltip-frontend company-echo-metadata-frontend)))
  '(company-minimum-prefix-length 2)
  '(company-require-match nil)
+ '(compilation-scroll-output t)
  '(cursor-type (quote bar))
  '(custom-enabled-themes (quote (monokai)))
  '(custom-safe-themes

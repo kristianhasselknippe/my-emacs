@@ -555,9 +555,9 @@
 (add-hook 'cargo-process-mode-hook 'setup-cargo-rust-mode)
 
 
-(use-package glsl-mode
-  :mode ("\\.fs\\'" "\\.vs\\'")
-  :ensure t)
+;(use-package glsl-mode
+;  :mode ("\\.fs\\'" "\\.vs\\'")
+;  :ensure t)
 
 (use-package reveal-in-osx-finder
   :ensure t)

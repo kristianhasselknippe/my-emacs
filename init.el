@@ -644,7 +644,10 @@
 (defhydra hydra-global (:color red)
   "Quick access stuff"
   ("r" omnisharp-reload-solution "Omnisharp reload solution")
-  ("s" omnisharp-start-omnisharp-server "Omnisharp start server"))
+  ("s" omnisharp-start-omnisharp-server "Omnisharp start server")
+  ("g" revert-buffer "Revert buffer")
+  ("l" whitespace-cleanup "Whitespace cleanup")
+  ("c" compile "Compile"))
 
 (global-set-key (kbd "M-C-g") 'hydra-global/body)
 

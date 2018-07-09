@@ -659,4 +659,10 @@
 (use-package yasnippet-snippets
   :ensure t)
 
-(global-set-key (kbd "C-c <tab>") 'yas/insert-snippet)
+(global-set-key (kbd "C-c <tab>") 'yas-insert-snippet)
+
+
+(defun my-compilation-mode-setup ()
+  (define-key compilation-mode-map (kbd "M-p") #'ace-window))
+
+(add-hook 'compilation-mode-hook #'my-compilation-mode-setup)

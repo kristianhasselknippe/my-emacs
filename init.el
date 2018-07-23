@@ -651,7 +651,8 @@
   ("s" omnisharp-start-omnisharp-server "Omnisharp start server")
   ("g" revert-buffer "Revert buffer")
   ("l" whitespace-cleanup "Whitespace cleanup")
-  ("c" compile "Compile"))
+  ("c" compile "Compile")
+  ("o" cfw:open-org-calendar "Agenda"))
 
 (global-set-key (kbd "M-C-g") 'hydra-global/body)
 
@@ -670,3 +671,8 @@
   (define-key compilation-mode-map (kbd "M-p") #'ace-window))
 
 (add-hook 'compilation-mode-hook #'my-compilation-mode-setup)
+
+(require 'calfw)
+(require 'calfw-org)
+
+(require 'org-gcal)

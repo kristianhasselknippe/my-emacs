@@ -359,7 +359,7 @@
 
 (use-package web-mode
   :ensure t
-  :mode "\\.tsx\\'")
+  :mode "\\.tsx\\'" "\\.cshtml\\'")
 
 (add-hook 'typescript-mode-hook (lambda () (setup-tide-mode typescript-mode-map)))
 (add-hook 'web-mode-hook

@@ -646,24 +646,30 @@
   ("t" org-todo "toggle todo")
   ("s" org-schedule "schedule"))
 
+(defun start-eshell-in-current-dir ()
+  (interactive)
+  (eshell (universal-argument)))
+
 (defhydra hydra-global (:color red)
    "
 ^Misc^                   ^Omnisharp^           ^Org^          ^Frame^
 ^^^^^^^^-----------------------------------------------------------------
-_r_: Revert buffer       _r_: reload solution  _o_: Agenda    _f_: Make frame
+_g_: Revert buffer       _r_: reload solution  _o_: Agenda    _f_: Make frame
 _l_: Whitespace cleanup  _s_: start server                  _d_: Delete frame
 _c_: Compile
-_g_: Revert buffer
+_e_: Error list
 
 "
-  ("r" omnisharp-reload-solution)
-  ("s" omnisharp-start-omnisharp-server)
   ("g" revert-buffer)
   ("l" whitespace-cleanup)
   ("c" compile)
+  ("e" flycheck-list-errors)
+  ("r" omnisharp-reload-solution)
+  ("s" omnisharp-start-omnisharp-server)
   ("o" cfw:open-org-calendar)
   ("f" make-frame)
-  ("d" delete-frame))
+  ("d" delete-frame)
+  ("E" start-eshell-in-current-dir))
 
 (global-set-key (kbd "M-C-g") 'hydra-global/body)
 

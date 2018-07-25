@@ -643,16 +643,27 @@
 (defhydra hydra-org-mode (:color blue)
   "Usefull stuff"
   ("a" org-date-from-calendar "get date")
-  ("t" org-todo "toggle todo"))
+  ("t" org-todo "toggle todo")
+  ("s" org-schedule "schedule"))
 
 (defhydra hydra-global (:color red)
-  "Quick access stuff"
-  ("r" omnisharp-reload-solution "Omnisharp reload solution")
-  ("s" omnisharp-start-omnisharp-server "Omnisharp start server")
-  ("g" revert-buffer "Revert buffer")
-  ("l" whitespace-cleanup "Whitespace cleanup")
-  ("c" compile "Compile")
-  ("o" cfw:open-org-calendar "Agenda"))
+   "
+^Misc^                   ^Omnisharp^           ^Org^          ^Frame^
+^^^^^^^^-----------------------------------------------------------------
+_r_: Revert buffer       _r_: reload solution  _o_: Agenda    _f_: Make frame
+_l_: Whitespace cleanup  _s_: start server                  _d_: Delete frame
+_c_: Compile
+_g_: Revert buffer
+
+"
+  ("r" omnisharp-reload-solution)
+  ("s" omnisharp-start-omnisharp-server)
+  ("g" revert-buffer)
+  ("l" whitespace-cleanup)
+  ("c" compile)
+  ("o" cfw:open-org-calendar)
+  ("f" make-frame)
+  ("d" delete-frame))
 
 (global-set-key (kbd "M-C-g") 'hydra-global/body)
 
@@ -672,7 +683,9 @@
 
 (add-hook 'compilation-mode-hook #'my-compilation-mode-setup)
 
-(require 'calfw)
-(require 'calfw-org)
-
-(require 'org-gcal)
+(use-package calfw
+  :ensure t)
+(use-package calfw-org
+  :ensure t)
+(use-package org-gcal
+  :ensure t)

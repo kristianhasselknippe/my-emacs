@@ -13,7 +13,8 @@
 
 (setq package-list '(use-package auto-complete ac-cider flycheck hideshow sgml-mode auto-complete-config company
 				   smex paredit-menu undo-tree highlight-focus dired-x graphviz-dot-mode
-				   nodejs-repl rust-mode browse-url flycheck-flow yaml-mode))
+				   nodejs-repl rust-mode browse-url flycheck-flow yaml-mode dotnet company-restclient
+				   org-gcal calfw-org calfw))
 
 (package-initialize)
 

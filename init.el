@@ -589,7 +589,9 @@
 
 (use-package expand-region
   :ensure t
-  :config (global-set-key (kbd "C-@") 'er/expand-region))
+  :config (global-set-key (if (string= system-type "darwin")
+							  (kbd "C-@")
+							(kbd "C-'")) 'er/expand-region))
 
 (use-package ts-comint
   :ensure t)

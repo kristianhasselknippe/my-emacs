@@ -117,15 +117,6 @@
   (add-hook 'magit-mode-hook 'my-magit-mode-setup)
   (setq magit-last-seen-setup-instructions "1.4.0"))
 
-(use-package magithub
-  :after magit
-  :ensure t
-  :config
-  (magithub-feature-autoinject t)
-  (setq magithub-clone-default-directory "~/"))
-
-;(require 'magit-gitflow)
-;(add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
 
 
 (when (fboundp 'windmove-default-keybindings)

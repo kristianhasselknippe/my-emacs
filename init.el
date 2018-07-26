@@ -664,13 +664,13 @@ _e_: Error list
 (use-package yasnippet
   :ensure t)
 
-(yas-global-mode 1)
-
 (use-package yasnippet-snippets
   :ensure t)
 
-(global-set-key (kbd "C-c <tab>") 'yas-insert-snippet)
+(add-to-list 'yasnippet-snippets-dir "~/.emacs.d/snippets/")
+(yas-global-mode 1)
 
+(global-set-key (kbd "C-c <tab>") 'yas-insert-snippet)
 
 (defun my-compilation-mode-setup ()
   (define-key compilation-mode-map (kbd "M-p") #'ace-window))

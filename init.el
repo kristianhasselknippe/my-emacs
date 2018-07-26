@@ -117,12 +117,6 @@
   (add-hook 'magit-mode-hook 'my-magit-mode-setup)
   (setq magit-last-seen-setup-instructions "1.4.0"))
 
-
-
-(when (fboundp 'windmove-default-keybindings)
-  (windmove-default-keybindings))
-
-
 (use-package undo-tree
   :ensure t
   :config (global-undo-tree-mode))

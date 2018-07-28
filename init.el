@@ -535,12 +535,10 @@
 (defun setup-cargo-rust-mode ()
   (define-key rust-mode-map (kbd "<f5>") #'cargo-process-build)
   (define-key rust-mode-map (kbd "M-<f5>") #'cargo-process-test)
-  (define-key rust-mode-map (kbd "S-<f5>") #'cargo-process-run))
+  (define-key rust-mode-map (kbd "S-<f5>") #'cargo-process-run)
+  (define-key cargo-process-mode-map (kbd "M-p") #'ace-window))
 
 (add-hook 'rust-mode-hook #'setup-cargo-rust-mode)
-
-(defun setup-cargo-rust-mode ()
-  (define-key cargo-process-mode-map (kbd "M-p") #'ace-window))
 
 (add-hook 'cargo-process-mode-hook 'setup-cargo-rust-mode)
 

@@ -683,3 +683,16 @@ _e_: Error list
   :ensure t)
 (use-package org-gcal
   :ensure t)
+
+
+
+;;(load-file "./slack-integration.el")
+
+
+(defun comment-or-uncomment-region-if-region ()
+  (interactive)
+  (if mark-active
+	  (comment-or-uncomment-region (region-beginning) (region-end))
+	(insert-char ?/)))
+
+(global-set-key (kbd "/") 'comment-or-uncomment-region-if-region)

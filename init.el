@@ -135,6 +135,12 @@
 	      ("M-." . omnisharp-go-to-definition)
 	      ("C-c C-g" . omnisharp-navigate-to-solution-file)))
 
+;;This is needed to get company working with omnisharp
+(eval-after-load
+ 'company
+ '(add-to-list 'company-backends 'company-omnisharp))
+(add-hook 'csharp-mode-hook #'company-mode)
+
 (use-package csharp-mode
   :ensure t
   :mode ("\\.uno\\'" "\\.cs\\'"))
@@ -145,8 +151,8 @@
 (defun my-csharp-mode-setup ()
   ;;(dotnet-mode)
   (helm-mode)
-  (unless omnisharp-server-executable-path
-    (message "You need to install the omnisharp server using M-x omnisharp-install-server"))
+;;  (unless omnisharp-server-executable-path
+    ;;(message "You need to install the omnisharp server using M-x omnisharp-install-server"))
 
   (omnisharp-mode)
   (company-mode)

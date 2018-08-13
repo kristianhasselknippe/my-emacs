@@ -26,6 +26,9 @@
   (setq magit-auto-revert-mode nil)
   (add-hook 'magit-mode-hook 'my-magit-mode-setup))
 
+(use-package git-gutter
+  :ensure t)
+
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq delete-by-moving-to-trash t)
 
@@ -61,7 +64,11 @@
 
 (use-package fsharp-mode
   :ensure t
-  :mode "\\.fs\\'")
+  :mode "\\.fs\\'"
+  :config
+  (when (string= system-type "darwin")
+    (setq inferior-fsharp-program "/Library/Frameworks/Mono.framework/Versions/Current/Commands/fsharpi --readline-")
+    (setq fsharp-compiler "/Library/Frameworks/Mono.framework/Versions/Current/Commands/fsharpc")))
 
 (defun my-fsharp-mode-setup ()
   (define-key fsharp-mode-map (kbd "C-c C-c") #'fsharp-ac/complete-at-point)
@@ -242,6 +249,7 @@
 	(let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
 	  (process-send-string proc text)
 	  (process-send-eof proc))))
+
 (when (string= system-type "darwin")
   (load-file "~/.emacs.d/reveal-in-finder.el")
   (setq mac-option-modifier nil
@@ -250,8 +258,8 @@
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx)
 
-  (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "/usr/local/bin")))
-  (setq exec-path (append exec-path (list (expand-file-name "/usr/local/bin")))))
+  (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "/usr/local/bin") ":" (expand-file-name "/Library/Frameworks/Mono.framework/Versions/Current/Commands/")))
+  (setq exec-path (append exec-path (list (expand-file-name "/usr/local/bin") (expand-file-name "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"))))1)
 
 (use-package rainbow-mode
   :ensure t)
@@ -475,3 +483,5 @@ _e_: Error list
 
 ;;Always highlight matching parens
 (show-paren-mode)
+
+(global-whitespace-mode +1)

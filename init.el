@@ -123,27 +123,30 @@
 (use-package omnisharp
   :ensure t
   :bind (:map omnisharp-mode-map
-			  ("C-c C-c" . omnisharp-auto-complete)
-			  ("C-c C-e" . flycheck-list-errors)
-			  ("C-c C-f" . omnisharp-run-code-action-refactoring)
-			  ("C-c f" . omnisharp-code-format-entire-file)
-			  ("C-c s" . omnisharp-helm-find-symbols)
-			  ("C-c C-d" . omnisharp-current-type-documentation)
-			  ("C-c i" . omnisharp-find-implementations)
-			  ("C-c r" . omnisharp-rename)
-			  ("C-c C-r" . omnisharp-helm-find-usages)
-			  ("M-." . omnisharp-go-to-definition)
-			  ("C-c C-g" . omnisharp-navigate-to-solution-file)))
+	      ("C-c C-c" . omnisharp-auto-complete)
+	      ("C-c C-e" . flycheck-list-errors)
+	      ("C-c C-f" . omnisharp-run-code-action-refactoring)
+	      ("C-c f" . omnisharp-code-format-entire-file)
+	      ("C-c s" . omnisharp-helm-find-symbols)
+	      ("C-c C-d" . omnisharp-current-type-documentation)
+	      ("C-c i" . omnisharp-find-implementations)
+	      ("C-c r" . omnisharp-rename)
+	      ("C-c C-r" . omnisharp-helm-find-usages)
+	      ("M-." . omnisharp-go-to-definition)
+	      ("C-c C-g" . omnisharp-navigate-to-solution-file)))
 
 (use-package csharp-mode
   :ensure t
-  :mode ("\\.uno\\'" "\\.cs'"))
+  :mode ("\\.uno\\'" "\\.cs\\'"))
+
+;;(use-package dotnet-mode
+;;  :ensure dotnet)
 
 (defun my-csharp-mode-setup ()
-  (dotnet-mode)
+  ;;(dotnet-mode)
   (helm-mode)
   (unless omnisharp-server-executable-path
-	(message "You need to install the omnisharp server using M-x omnisharp-install-server"))
+    (message "You need to install the omnisharp server using M-x omnisharp-install-server"))
 
   (omnisharp-mode)
   (company-mode)
@@ -164,6 +167,8 @@
   :config
   (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
   (global-set-key (kbd "C-c y") 'helm-show-kill-ring))
+
+(helm-mode 1)
 
 (use-package helm-git-grep
   :bind ("C-c j" . helm-git-grep))
@@ -237,7 +242,10 @@
 		mac-command-modifier 'meta
 		x-select-enable-clipboard nil)
   (setq interprogram-cut-function 'paste-to-osx)
-  (setq interprogram-paste-function 'copy-from-osx))
+  (setq interprogram-paste-function 'copy-from-osx)
+
+  (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "/usr/local/bin")))
+  (setq exec-path (append exec-path (list (expand-file-name "/usr/local/bin")))))
 
 (use-package rainbow-mode
   :ensure t)
@@ -458,3 +466,6 @@ _e_: Error list
   :ensure t)
 (use-package calfw-org
   :ensure t)
+
+;;Always highlight matching parens
+(show-paren-mode)

@@ -334,7 +334,7 @@
 (add-hook 'org-mode-hook #'my-org-mode-setup)
 
 (setq org-directory "~/personal")
-(setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-default-notes-file (concat org-directory "/tasks.org"))
 (define-key global-map (kbd "C-c c") 'org-capture)
 
 

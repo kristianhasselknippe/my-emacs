@@ -52,6 +52,9 @@
 (use-package company
   :ensure t
   :hook (typescript-mode))
+
+(global-company-mode +1)
+
 (defun setup-company-mode ()
   (setq company-tooltip-align-annotations t)
   (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
@@ -112,10 +115,21 @@
 (use-package nodejs-repl
   :ensure t)
 
+(defun my-lsp-mode-setup ()
+  ("C-c C-r" . xref-find-references)
+  ("C-c s" . helm-imenu)
+  ("C-c r" . lsp-rename))
+(use-package lsp-mode
+  :ensure t)
+(add-hook 'lsp-mode-hook #'my-lsp-mode-setup)
+
 (use-package company-lsp
   :ensure t)
 (push 'company-lsp company-backends)
 
+(defun my-rust-mode-setup ()
+  (company-mode)
+  (lsp-rust-enable))
 (use-package rust-mode
   :mode "\\.rs\\'"
   :bind (:map rust-mode-map
@@ -124,9 +138,12 @@
 			  ("C-c C-r" . 'xref-find-references))
   :init
   (setq rust-format-on-save t))
+(add-hook 'rust-mode-hook #'my-rust-mode-setup)
 
-(use-package lsp-mode
-  :ensure t)
+(use-package lsp-rust
+  :ensure t
+  :config
+  (setq lsp-rust-rls-command '("rls")))
 
 (use-package eglot
   :ensure t)
@@ -244,8 +261,8 @@
               (setup-tide-mode web-mode-map))))
 
 (use-package restclient
-  :mode ("\\.http\\'")
-  :ensure t)
+  :ensure t
+  :mode ("\\.http\\'"))
 
 (use-package counsel
   :ensure t)

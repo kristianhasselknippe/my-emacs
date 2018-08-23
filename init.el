@@ -55,6 +55,7 @@
 (use-package nxml-mode
   :mode "\\.ux\\'"
   :config
+  (setq tab-width 4)
   (add-hook 'nxml-mode-hook #'rainbow-mode))
 
 (use-package asm-mode
@@ -355,6 +356,23 @@
   :ensure t)
 (define-key global-map (kbd "C-j") 'avy-goto-word-1)
 
+(defun my-avy-paste-word (char)
+   "Paste a word selected with avy"
+   (interactive (list (read-char "char:" t)))
+   (let ((avy-action 'my-copy-word))
+       (avy--generic-jump (my-avy-regexp char) nil avy-style)
+       (yank)))
+(defun my-copy-word (pt)
+    (save-excursion
+    (goto-char pt)
+    (kill-new (thing-at-point 'symbol))))
+(defun my-avy-regexp (c)
+   (concat
+   "\\b"
+   (string c)))
+(define-key global-map (kbd "C-M-j") 'my-avy-paste-word)
+
+
 (defun eshell-setup ()
   (define-key eshell-mode-map (kbd "M-p") 'ace-window))
 (add-hook 'eshell-mode-hook 'eshell-setup)
@@ -485,3 +503,18 @@ _e_: Error list
 (show-paren-mode)
 
 (global-whitespace-mode +1)
+
+(use-package swift-mode
+  :ensure t)
+
+(require 'ox-md)
+(require 'ox-man)
+
+(use-package alert
+  :ensure t)
+
+
+(defun my-compilation-mode-init ()
+  (define-key 'compilation-mode-map (kbd "M-p") 'ace-window))
+
+(add-hook 'compilation-mode-hook #'my-compilation-mode-init)

@@ -26,6 +26,12 @@
   (setq magit-auto-revert-mode nil)
   (add-hook 'magit-mode-hook 'my-magit-mode-setup))
 
+(defun my-smerge-mode-init ()
+  (define-key smerge-mode-map (kbd "C-c C-c") 'smerge-keep-current)
+  (define-key smerge-mode-map (kbd "C-c C-a") 'smerge-keep-all))
+
+(add-hook 'smerge-mode-hook #'my-smerge-mode-init)
+
 (use-package git-gutter
   :ensure t)
 
@@ -56,6 +62,7 @@
   :mode "\\.ux\\'"
   :config
   (setq tab-width 4)
+  (setq indent-tabs-mode nil)
   (add-hook 'nxml-mode-hook #'rainbow-mode))
 
 (use-package asm-mode
@@ -155,6 +162,9 @@
 
 ;;(use-package dotnet-mode
 ;;  :ensure dotnet)
+
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
 
 (defun my-csharp-mode-setup ()
   ;;(dotnet-mode)
@@ -341,7 +351,9 @@
 
 (use-package ace-window
   :ensure t
-  :config (global-set-key (kbd "M-p") 'ace-window))
+  :config
+  (global-set-key (kbd "M-p") 'ace-window)
+  (global-set-key (kbd "C-M-p") 'ace-delete-window))
 
 ;; Offer to create parent directories if they do not exist
 ;; http://iqbalansari.github.io/blog/2014/12/07/automatically-create-parent-directories-on-visiting-a-new-file-in-emacs/
@@ -462,12 +474,17 @@
   (interactive)
   (eshell (universal-argument)))
 
+(defun make-frame-in-center-with-some-size ()
+  (make-frame :width 800 :height 150
+	      :user-position 't
+	      :left 500 :top 300))
+
 (defhydra hydra-global (:color red)
    "
 ^Misc^                   ^Omnisharp^           ^Org^          ^Frame^
 ^^^^^^^^-----------------------------------------------------------------
 _g_: Revert buffer       _r_: reload solution  _o_: Agenda    _f_: Make frame
-_l_: Whitespace cleanup  _s_: start server                  _d_: Delete frame
+_l_: Whitespace cleanup  _s_: start server     _t_: Todo list _d_: Delete frame
 _c_: Compile
 _e_: Error list
 "
@@ -476,9 +493,10 @@ _e_: Error list
   ("c" compile)
   ("e" flycheck-list-errors)
   ("r" omnisharp-reload-solution)
+  ("t" org-todo-list)
   ("s" omnisharp-start-omnisharp-server)
   ("o" cfw:open-org-calendar)
-  ("f" make-frame)
+  ("f" make-frame-in-center-with-some-size)
   ("d" delete-frame)
   ("E" start-eshell-in-current-dir))
 
@@ -515,6 +533,13 @@ _e_: Error list
 
 
 (defun my-compilation-mode-init ()
-  (define-key 'compilation-mode-map (kbd "M-p") 'ace-window))
+  (define-key compilation-mode-map (kbd "M-p") 'ace-window)
+  (define-key compilation-mode-map (kbd "C-M-p") 'ace-delete-window))
 
 (add-hook 'compilation-mode-hook #'my-compilation-mode-init)
+
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode)
+  (define-key global-map (kbd "C-c C-h") 'which-key-show-top-level))

@@ -12,6 +12,7 @@
  '(display-line-numbers t)
  '(global-company-mode t)
  '(global-git-gutter-mode t)
+ '(global-whitespace-mode t)
  '(helm-completing-read-handlers-alist
    (quote
     ((describe-function . helm-completing-read-symbols)
@@ -43,7 +44,7 @@
  '(omnisharp-server-executable-path nil)
  '(package-selected-packages
    (quote
-    (alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree expand-region wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
+    (which-key alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree expand-region wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
  '(rg-command-line-flags nil)
  '(whitespace-line-column 350)
  '(whitespace-style
@@ -54,6 +55,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(web-mode-whitespace-face ((t (:background "#454545"))))
  '(whitespace-big-indent ((t nil))))
 
 (setq company-dabbrev-downcase 0)

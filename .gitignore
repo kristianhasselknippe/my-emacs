@@ -3,3 +3,9 @@ elpa
 eshell
 bookmarks
 smex-items
+.cache
+.mc-lists.el
+projectile-bookmarks.eld
+projectile.cache
+server
+url

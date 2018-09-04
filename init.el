@@ -155,7 +155,7 @@
 (use-package omnisharp
   :ensure t
   :bind (:map omnisharp-mode-map
-	      ("C-c C-c" . omnisharp-auto-complete)
+	      ("C-c C-c" . company-complete)
 	      ("C-c C-e" . flycheck-list-errors)
 	      ("C-c C-f" . omnisharp-run-code-action-refactoring)
 	      ("C-c f" . omnisharp-code-format-entire-file)
@@ -361,9 +361,27 @@
   (define-key org-mode-map (kbd "C-c C-v") 'hydra-org-mode/body))
 (add-hook 'org-mode-hook #'my-org-mode-setup)
 
-(setq org-directory "~/personal")
-(setq org-default-notes-file (concat org-directory "/tasks.org"))
+(setq org-directory "~/org")
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-default-refile-file (concat org-directory "/refile.org"))
 (define-key global-map (kbd "C-c c") 'org-capture)
+
+
+
+(setq org-capture-templates
+    '(("t" "Todo" entry (file org-default-refile-file)
+       "* TODO %?\n%U" :empty-lines 1)
+      ("T" "Todo with Clipboard" entry (file org-default-refile-file)
+       "* TODO %?\n%U\n   %c" :empty-lines 1)
+      ("n" "Note" entry (file org-default-refile-file)
+       "* NOTE %?\n%U" :empty-lines 1)
+      ("N" "Note with Clipboard" entry (file org-default-refile-file)
+       "* NOTE %?\n%U\n   %c" :empty-lines 1)
+      ("e" "Event" entry (file+headline org-default-refile-file "Transient")
+       "* EVENT %?\n%U" :empty-lines 1)
+      ("E" "Event With Clipboard" entry (file+headline org-default-refile-file "Transient")
+       "* EVENT %?\n%U\n   %c" :empty-lines 1))
+    )
 
 
 (use-package ace-window

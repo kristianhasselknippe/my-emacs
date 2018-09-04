@@ -61,3 +61,9 @@
 
 (setq company-dabbrev-downcase 0)
 (setq company-idle-delay 0)
+
+(set-face-attribute 'default nil
+                    :family "Inconsolata"
+                    :height 130
+                    :weight 'normal
+                    :width 'normal)

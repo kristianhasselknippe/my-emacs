@@ -53,8 +53,6 @@
   :ensure t
   :hook (typescript-mode))
 
-(global-company-mode +1)
-
 (defun setup-company-mode ()
   (setq company-tooltip-align-annotations t)
   (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
@@ -361,6 +359,18 @@
   (define-key org-mode-map (kbd "C-c C-v") 'hydra-org-mode/body))
 (add-hook 'org-mode-hook #'my-org-mode-setup)
 
+(setq org-todo-keywords
+'((sequence "TODO(t)" "|" "DONE(d)")
+  (sequence "TOREPORT(r)" "|" "REPORTED(b)")))
+
+(use-package org-jira
+  :ensure t
+  :config
+  ;;(setq request-message-level 'debug)
+  ;;(setq request-log-level 'debug)
+  (setq jiralib-url "https://kudosco.atlassian.net/"))
+
+
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-default-refile-file (concat org-directory "/refile.org"))
@@ -557,6 +567,11 @@ _e_: Error list
 
 (global-whitespace-mode +1)
 
+(set-face-attribute 'whitespace-tab nil
+                    :foreground "#454545"
+                    :background nil
+                    :weight 'bold)
+
 (use-package swift-mode
   :ensure t)
 
@@ -578,3 +593,13 @@ _e_: Error list
   :config
   (which-key-mode)
   (define-key global-map (kbd "C-c C-h") 'which-key-show-top-level))
+
+(setq company-dabbrev-downcase 0)
+(setq company-idle-delay 0)
+
+(when (not (string= system-type "darwin"))
+  (set-face-attribute 'default nil
+                      :family "Inconsolata"
+                      :height 130
+                      :weight 'normal
+                      :width 'normal))

@@ -44,7 +44,7 @@
  '(omnisharp-server-executable-path nil)
  '(package-selected-packages
    (quote
-    (which-key alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree expand-region wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
+    (org-jira lsp-rust which-key alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree expand-region wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
  '(rg-command-line-flags nil)
  '(ring-bell-function (quote ignore))
  '(whitespace-line-column 350)
@@ -56,14 +56,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(web-mode-whitespace-face ((t (:background "#454545"))))
  '(whitespace-big-indent ((t nil))))
-
-(setq company-dabbrev-downcase 0)
-(setq company-idle-delay 0)
-
-(set-face-attribute 'default nil
-                    :family "Inconsolata"
-                    :height 130
-                    :weight 'normal
-                    :width 'normal)

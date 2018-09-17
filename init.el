@@ -179,7 +179,6 @@
 ;;  :ensure dotnet)
 
 (setq-default tab-width 4)
-(setq-default indent-tabs-mode nil)
 
 (defun my-csharp-mode-setup ()
   ;;(dotnet-mode)
@@ -191,7 +190,6 @@
   (company-mode)
   (flycheck-mode)
 
-  (setq indent-tabs-mode nil)
   (setq c-syntactic-indentation t)
   (c-set-style "ellemtel")
   (setq c-basic-offset 4)
@@ -223,12 +221,15 @@
   (define-key rg-mode-map (kbd "<C-return>") 'compile-goto-error-same-window))
 (add-hook 'rg-mode-hook #'my-rg-mode-setup)
 
+(defun run-prettier-on-current-file ()
+  (interactive)
+  (start-process "prettier" (buffer-file-name) "--write"))
+
 (defun setup-tide-mode (mode-map)
   (interactive)
   (tide-setup)
   (flycheck-mode +1)
   (eldoc-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (tide-hl-identifier-mode +1)
   (company-mode +1)
 
@@ -257,6 +258,8 @@
           (lambda ()
             (when (string-equal "tsx" (file-name-extension buffer-file-name))
               (setup-tide-mode web-mode-map))))
+(flycheck-add-mode 'typescript-tslint 'web-mode)
+
 
 (use-package restclient
   :ensure t

@@ -535,6 +535,8 @@ _g_: Revert buffer       _r_: reload solution  _o_: Agenda    _f_: Make frame
 _l_: Whitespace cleanup  _s_: start server     _t_: Todo list _d_: Delete frame
 _c_: Compile
 _e_: Error list
+_w_: Flychek and whitespace mode
+_j_: Prettier
 "
   ("g" revert-buffer)
   ("l" whitespace-cleanup)
@@ -546,6 +548,8 @@ _e_: Error list
   ("o" cfw:open-org-calendar)
   ("f" make-frame-in-center-with-some-size)
   ("d" delete-frame)
+  ("w" toggle-flyspell-and-whitespace-mode)
+  ("j" prettier-js)
   ("E" start-eshell-in-current-dir))
 
 (global-set-key (kbd "M-C-g") 'hydra-global/body)
@@ -606,3 +610,6 @@ _e_: Error list
                       :height 130
                       :weight 'normal
                       :width 'normal))
+
+(use-package prettier-js
+  :ensure t)

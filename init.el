@@ -529,9 +529,9 @@
 
 (defhydra hydra-global (:color red)
    "
-^Misc^                   ^Omnisharp^           ^Org^          ^Frame^
-^^^^^^^^-----------------------------------------------------------------
-_g_: Revert buffer       _r_: reload solution  _o_: Agenda    _f_: Make frame
+^Misc^                   ^Omnisharp^           ^Org^          ^Frame^              ^Git^
+^^^^^^^^------------------------------------------------------------------------------------
+_g_: Revert buffer       _r_: reload solution  _o_: Agenda    _f_: Make frame     _b_: Blame
 _l_: Whitespace cleanup  _s_: start server     _t_: Todo list _d_: Delete frame
 _c_: Compile
 _e_: Error list
@@ -550,7 +550,8 @@ _j_: Prettier
   ("d" delete-frame)
   ("w" toggle-flyspell-and-whitespace-mode)
   ("j" prettier-js)
-  ("E" start-eshell-in-current-dir))
+  ("E" start-eshell-in-current-dir)
+  ("b" magit-blame))
 
 (global-set-key (kbd "M-C-g") 'hydra-global/body)
 

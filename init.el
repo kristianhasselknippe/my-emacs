@@ -287,8 +287,8 @@
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx)
 
-  (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "/usr/local/bin") ":" (expand-file-name "/Library/Frameworks/Mono.framework/Versions/Current/Commands/")))
-  (setq exec-path (append exec-path (list (expand-file-name "/usr/local/bin") (expand-file-name "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"))))1)
+  (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "/usr/local/bin") ":" (expand-file-name "~/.cargo/bin") ":" (expand-file-name "/Library/Frameworks/Mono.framework/Versions/Current/Commands/")))
+  (setq exec-path (append exec-path (list (expand-file-name "/usr/local/bin") (expand-file-name "~/.cargo/bin") (expand-file-name "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"))))1)
 
 (use-package rainbow-mode
   :ensure t)
@@ -527,28 +527,32 @@
 	      :user-position 't
 	      :left 500 :top 300))
 
+
+(use-package goto-chg
+  :ensure t)
+
 (defhydra hydra-global (:color red)
    "
 ^Misc^                   ^Omnisharp^           ^Org^          ^Frame^              ^Git^
 ^^^^^^^^------------------------------------------------------------------------------------
 _g_: Revert buffer       _r_: reload solution  _o_: Agenda    _f_: Make frame     _b_: Blame
-_l_: Whitespace cleanup  _s_: start server     _t_: Todo list _d_: Delete frame
-_c_: Compile
+_l_: Whitespace cleanup  _s_: start server     _t_: Todo list                     _d_: Diff
+_c_: Goto last change
 _e_: Error list
-_w_: Flychek and whitespace mode
+_w_: Compile
 _j_: Prettier
 "
   ("g" revert-buffer)
   ("l" whitespace-cleanup)
-  ("c" compile)
+  ("c" goto-last-change)
   ("e" flycheck-list-errors)
   ("r" omnisharp-reload-solution)
   ("t" org-todo-list)
   ("s" omnisharp-start-omnisharp-server)
   ("o" cfw:open-org-calendar)
   ("f" make-frame-in-center-with-some-size)
-  ("d" delete-frame)
-  ("w" toggle-flyspell-and-whitespace-mode)
+  ("d" magit-diff-popup)
+  ("w" compile)
   ("j" prettier-js)
   ("E" start-eshell-in-current-dir)
   ("b" magit-blame))
@@ -614,3 +618,12 @@ _j_: Prettier
 
 (use-package prettier-js
   :ensure t)
+
+(use-package quelpa
+  :ensure t
+  :config
+  (setq quelpa-upgrade-p t))
+
+(quelpa 'company-tabnine)
+(require 'company-tabnine)
+(add-to-list 'company-backends #'company-tabnine)

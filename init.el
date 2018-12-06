@@ -627,3 +627,10 @@ _j_: Prettier
 (quelpa 'company-tabnine)
 (require 'company-tabnine)
 (add-to-list 'company-backends #'company-tabnine)
+(use-package dart-mode
+  :ensure t
+  :mode "\\.dart\\'"
+  :config
+  (setq dart-debug t)
+  (setq dart-enable-analysis-server t))
+  ;;(add-hook 'dart-mode-hook #'my-dart-mode-init))

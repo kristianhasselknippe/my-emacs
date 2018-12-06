@@ -261,8 +261,8 @@
 (flycheck-add-mode 'typescript-tslint 'web-mode)
 
 
-(use-package restclient
-  :ensure t
+(use-package restclient-mode
+  :ensure restclient
   :mode ("\\.http\\'"))
 
 (use-package counsel
@@ -527,6 +527,16 @@
 	      :user-position 't
 	      :left 500 :top 300))
 
+(defun toggle-flyspell-and-whitespace-mode ()
+  "Toggle `flyspell-mode' and `whitespace-mode'."
+  (interactive)
+  (if (derived-mode-p 'prog-mode)
+      (flyspell-prog-mode)
+    (flyspell-mode)
+    (when flyspell-mode
+      (flyspell-buffer)))
+  (whitespace-mode 'toggle))
+
 
 (use-package goto-chg
   :ensure t)
@@ -619,18 +629,20 @@ _j_: Prettier
 (use-package prettier-js
   :ensure t)
 
-(use-package quelpa
-  :ensure t
-  :config
-  (setq quelpa-upgrade-p t))
+(use-package elfeed
+  :ensure t)
 
 (quelpa 'company-tabnine)
 (require 'company-tabnine)
 (add-to-list 'company-backends #'company-tabnine)
+
 (use-package dart-mode
   :ensure t
   :mode "\\.dart\\'"
   :config
   (setq dart-debug t)
   (setq dart-enable-analysis-server t))
-  ;;(add-hook 'dart-mode-hook #'my-dart-mode-init))
+;;(add-hook 'dart-mode-hook #'my-dart-mode-init))
+
+(use-package rotate
+  :ensure t)

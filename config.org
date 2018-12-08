@@ -1,6 +1,6 @@
 * Setup
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
@@ -26,7 +26,7 @@
 
 * Magit
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 
 (defun my-magit-mode-setup ()
   (define-key magit-mode-map (kbd "M-p") 'ace-window))
@@ -54,7 +54,7 @@
 
 * General and theme
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (setq-default tab-width 4)
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
@@ -132,7 +132,7 @@
 
 * Company
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 
 (use-package company
   :ensure t
@@ -150,7 +150,7 @@
 
 * Nxml
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 
 (use-package nxml-mode
   :mode "\\.ux\\'"
@@ -163,7 +163,7 @@
 
 * Asm
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package asm-mode
   :mode "\\.as\\'"
   :bind (:map asm-mode-map
@@ -173,7 +173,7 @@
 
 * Fsharp
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package fsharp-mode
   :ensure t
   :mode "\\.fs\\'"
@@ -191,7 +191,7 @@
 
 * Smex
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package smex
   :ensure t
   :bind ("M-x" . 'smex))
@@ -199,7 +199,7 @@
 
 * Undo-tree
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 
 (use-package undo-tree
   :ensure t
@@ -209,7 +209,7 @@
 
 * JavaScript
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 
 (use-package js2-mode
   :mode "\\.js\\'"
@@ -219,7 +219,7 @@
 
 * Json
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 
 (use-package json-mode
   :mode ("\\.json\\'" "\\.unoproj'")
@@ -229,7 +229,7 @@
 
 * Eshell
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (defun eshell-with-prefix-arg ()
   (interactive)
   (setq current-prefix-arg '()) ; C-u
@@ -242,7 +242,7 @@
 
 * Dired
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 
 (defun dired-config ()
   (define-key dired-mode-map (kbd "C-c C-p") #'dired-toggle-read-only))
@@ -253,14 +253,14 @@
 
 * Nodejs
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package nodejs-repl
   :ensure t)
 #+END_SRC
 
 * Lsp (language server protocol)
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package lsp-mode
   :ensure t
   :config
@@ -279,12 +279,12 @@
   (lsp-ui-mode))
 
 (use-package lsp-ui
-  :ensure t)
+  :ensure lsp-ui)
 #+END_SRC
 
 * Rust
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 
 (defun my-rust-mode-setup ()
   (company-mode)
@@ -307,7 +307,7 @@
 
 * Yaml
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package yaml-mode
   :mode ("\\.yml\\'" "\\.yaml\\'")
   :ensure t)
@@ -315,7 +315,7 @@
 
 * C#
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package omnisharp
   :ensure t
   :bind (:map omnisharp-mode-map
@@ -366,7 +366,7 @@
 
 * Helm
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package helm
   :ensure t
   :config
@@ -381,7 +381,7 @@
 
 * Swiper
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package swiper
   :ensure t
   :bind ("C-s" . swiper))
@@ -389,7 +389,7 @@
 
 * Rg/Ripgrep
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package rg
   :ensure t)
 (defun my-rg-mode-setup ()
@@ -400,7 +400,7 @@
 
 * Tide (TypeScript)
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (defun setup-tide-mode (mode-map)
   (interactive)
   (tide-setup)
@@ -438,14 +438,14 @@
 #+END_SRC
 
 * Restclient
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package restclient-mode
   :ensure restclient
   :mode ("\\.http\\'"))
 #+END_SRC
 
 * Counsel
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package counsel
   :ensure t)
 (global-set-key (kbd "C-M-s") 'counsel-rg)
@@ -453,7 +453,7 @@
 #+END_SRC
 
 * MacOS stuff
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (defun copy-from-osx ()
   (shell-command-to-string "pbpaste"))
 (defun paste-to-osx (text &optional push)
@@ -482,13 +482,13 @@
 #+END_SRC
 
 * Rainbow mode
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package rainbow-mode
   :ensure t)
 #+END_SRC
 
 * Helm projectile
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package helm-projectile
   :ensure t
   :config
@@ -501,7 +501,7 @@
 #+END_SRC
 
 * Change window size
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (global-set-key (kbd "S-C-<left>") 'shrink-winndow-horizontally)
 (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
@@ -509,7 +509,7 @@
 #+END_SRC
 
 * Multiple cursors
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package multiple-cursors
   :ensure t
   :config
@@ -518,10 +518,10 @@
   (global-set-key (kbd "C-x r t") 'mc/edit-lines))
 #+END_SRC
 
-* Elisp
-#+BEGIN_SRC elisp
+* Emacs-Lisp :Tangle Yes
+#+BEGIN_SRC emacs-lisp :tangle yes
 (defun elisp-mode-setup ()
-  (message "initializing elisp")
+  (message "initializing emacs-lisp")
   (company-mode)
   (define-key emacs-lisp-mode-map (kbd "C-c C-f") 'eval-defun)
   (define-key emacs-lisp-mode-map (kbd "C-c C-b") 'edebug-x-modify-breakpoint-wrapper)
@@ -531,7 +531,7 @@
 #+END_SRC
 
 * Editor config
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package editorconfig
   :ensure t
   :config
@@ -539,7 +539,7 @@
 #+END_SRC
 
 * Org mode 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 ;; org-mode: Don't ruin S-arrow to switch windows please (use M-+ and M-- instead to toggle)
 (setq org-replace-disputed-keys t)
 
@@ -590,7 +590,7 @@
 
 * Ace window
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package ace-window
   :ensure t
   :config
@@ -599,7 +599,7 @@
 #+END_SRC
 
 * Acy zip to word
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package avy-zap
   :ensure t)
 (define-key global-map (kbd "C-j") 'avy-goto-word-1)
@@ -622,7 +622,7 @@
 #+END_SRC
 
 * Cargo
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package cargo
   :ensure t)
 (defun setup-cargo-rust-mode ()
@@ -635,7 +635,7 @@
 #+END_SRC
 
 * Markdown
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package markdown-mode
   :ensure t
   :mode ("\\.md\\'"))
@@ -645,7 +645,7 @@
 #+END_SRC
 
 * Libraries
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package ht
   :ensure t)
 (use-package s
@@ -655,14 +655,14 @@
 #+END_SRC
 
 * Wgrep
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package wgrep
   :ensure t)
 #+END_SRC
 
 * Expand region
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package expand-region
   :ensure t
   :config (global-set-key
@@ -672,7 +672,7 @@
 #+END_SRC
 
 * Locate file in explorer
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (defun locate-current-file-in-explorer ()
   (interactive)
   (cond
@@ -692,14 +692,14 @@
 
 * Neotree
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package neotree
   :ensure t)
 #+END_SRC
 
 * Hydra
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package hydra
   :ensure t)
 
@@ -762,7 +762,7 @@ _j_: Prettier
 #+END_SRC
 
 * Yasnippet
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package yasnippet
   :ensure t
   :config
@@ -774,7 +774,7 @@ _j_: Prettier
 #+END_SRC
 
 * Calendar
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package calfw
   :ensure t)
 (use-package calfw-org
@@ -783,21 +783,21 @@ _j_: Prettier
 
 * Swift
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package swift-mode
   :ensure t)
 #+END_SRC
 
 * Alert
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package alert
   :ensure t)
 #+END_SRC
 
 * Compilation
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (defun my-compilation-mode-init ()
   (define-key compilation-mode-map (kbd "M-p") 'ace-window)
   (define-key compilation-mode-map (kbd "C-M-p") 'ace-delete-window))
@@ -807,7 +807,7 @@ _j_: Prettier
 
 * Which key
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package which-key
   :ensure t
   :config
@@ -817,19 +817,19 @@ _j_: Prettier
 
 * Prettier
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package prettier-js
   :ensure t)
 #+END_SRC
 
 * Elfeed (RSS feed)
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package elfeed
   :ensure t)
 #+END_SRC
 
 * Dart
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (defun my-dart-mode-init ()
   (lsp-dart-enable)
   (flycheck-mode)
@@ -847,7 +847,7 @@ _j_: Prettier
 #+END_SRC
 
 * Rotate
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (use-package rotate
   :ensure t)
 #+END_SRC

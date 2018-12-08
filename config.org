@@ -829,6 +829,16 @@ _j_: Prettier
 #+END_SRC
 
 * Dart
+
+** Dependencies
+
+You need to install the dart_language_server using 
+#+BEGIN_SRC sh :tangle no
+pub global activate dart_language_server
+#+END_SRC
+
+** Config
+
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defun my-dart-mode-init ()
   (lsp-dart-enable)

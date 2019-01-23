@@ -756,32 +756,46 @@ To switch between them. To to [[Package or straight]].
 
 
 (use-package goto-chg)
+#+END_SRC
 
+** Omnisharp hydra
+
+#+BEGIN_SRC emacs-lisp :tangle yes
 (defhydra hydra-global (:color red)
    "
-^Misc^                   ^Omnisharp^           ^Org^          ^Frame^              ^Git^
-^^^^^^^^------------------------------------------------------------------------------------
-_g_: Revert buffer       _r_: reload solution  _o_: Agenda    _f_: Make frame     _b_: Blame
-_l_: Whitespace cleanup  _s_: start server     _t_: Todo list                     _d_: Diff
+^Omnisharp^
+--------------------
+_r_: reload solution
+_s_: start server
+"
+  ("r" omnisharp-reload-solution)
+  ("s" omnisharp-start-omnisharp-server))
+#+END_SRC
+
+** Global hydra
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defhydra hydra-global (:color red)
+   "
+^Misc^                    ^Git^      ^Projectile^
+^^^^^^^^-----------------------------------------
+_g_: Revert buffer       _b_: Blame  _t_: Switch project
+_l_: Whitespace cleanup  _d_: Diff
 _c_: Goto last change
 _e_: Error list
-_w_: Compile
+_w_: Compilet
 _j_: Prettier
 "
   ("g" revert-buffer)
   ("l" whitespace-cleanup)
   ("c" goto-last-change)
   ("e" flycheck-list-errors)
-  ("r" omnisharp-reload-solution)
-  ("t" org-todo-list)
-  ("s" omnisharp-start-omnisharp-server)
-  ("o" cfw:open-org-calendar)
-  ("f" make-frame-in-center-with-some-size)
   ("d" magit-diff-popup)
   ("w" compile)
   ("j" prettier-js)
   ("E" start-eshell-in-current-dir)
-  ("b" magit-blame))
+  ("b" magit-blame)
+  ("t" helm-projectile-switch-project))
 
 (global-set-key (kbd "M-C-g") 'hydra-global/body)
 #+END_SRC

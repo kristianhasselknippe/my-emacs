@@ -295,9 +295,11 @@ To switch between them. To to [[Package or straight]].
 ** LSP mode
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package lsp-mode
-  :commands lsp
-  :hook ((dart-mode rust-mode) . 'lsp)
+  :commands (lsp lsp-mode)
   :bind (("C-c C-r" . 'lsp-find-references)))
+
+(add-hook 'dart-mode-hook #'lsp)
+(add-hook 'rust-mode-hook #'lsp)
 #+END_SRC
 
 ** Require all the built in lsp clients
@@ -308,8 +310,8 @@ To switch between them. To to [[Package or straight]].
 ** Company integration
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package company-lsp
+  :commands company-lsp
   :after (company lsp-mode)
-  :hook (dart-mode rust-mode)
   :bind ("C-c C-c" . #'company-complete)
   :config (push 'company-lsp company-backends))
 
@@ -318,11 +320,9 @@ To switch between them. To to [[Package or straight]].
 ** LSP UI
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-;;(use-package lsp-ui
-;;  :ensure lsp-ui)
-;;
-;;(defun my-lsp-mode-hook ()
-;;  (lsp-ui-mode))
+(use-package lsp-ui
+  :after lsp-mode
+  :commands lsp-ui-mode)
 #+END_SRC
 
 * DAP (debug adapter protocol)

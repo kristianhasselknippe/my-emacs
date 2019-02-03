@@ -582,8 +582,7 @@ To switch between them. To to [[Package or straight]].
 
 (defun my-org-mode-setup ()
   (define-key org-mode-map (kbd "M-p") 'ace-window)
-  (define-key org-mode-map (kbd "C-j") 'avy-goto-word-1)
-  (define-key org-mode-map (kbd "C-c C-v") 'hydra-org-mode/body))
+  (define-key org-mode-map (kbd "C-j") 'avy-goto-word-1))
 (add-hook 'org-mode-hook #'my-org-mode-setup)
 
 (setq org-todo-keywords
@@ -729,11 +728,21 @@ To switch between them. To to [[Package or straight]].
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package hydra)
 
-(defhydra hydra-org-mode (:color blue)
-  "Usefull stuff"
-  ("a" org-date-from-calendar "get date")
-  ("t" org-todo "toggle todo")
-  ("s" org-schedule "schedule"))
+(use-package pretty-hydra
+  :straight
+    (pretty-hydra
+      :type git
+      :host github
+      :repo "jerrypnz/major-mode-hydra.el"))
+
+(use-package major-mode-hydra
+  :after pretty-hydra
+  :bind ("C-M-g" . major-mode-hydra)
+  :straight
+    (major-mode-hydra
+      :type git
+      :host github
+      :repo "jerrypnz/major-mode-hydra.el"))
 
 (defun start-eshell-in-current-dir ()
   (interactive)
@@ -775,7 +784,7 @@ _s_: start server
 ** Global hydra
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(defhydra hydra-global (:color red)
+(defhydra hydra-global (:color teal)
    "
 ^Misc^                    ^Git^      ^Projectile^
 ^^^^^^^^-----------------------------------------

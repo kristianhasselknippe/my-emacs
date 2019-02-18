@@ -173,7 +173,8 @@ To switch between them. To to [[Package or straight]].
 #+BEGIN_SRC emacs-lisp :tangle yes
 
 (use-package company
-  :hook (typescript-mode))
+  :commands company-mode
+  :hook ((typescript-mode) . company-mode))
 
 (defun setup-company-mode ()
   (setq company-tooltip-align-annotations t)
@@ -530,9 +531,6 @@ To switch between them. To to [[Package or straight]].
 (use-package helm-projectile
   :config
   (projectile-global-mode)
-  (global-set-key (kbd "C-c t") 'helm-projectile-find-file))(use-package helm-projectile
-  :config
-  (projectile-global-mode)
   (global-set-key (kbd "C-c t") 'helm-projectile-find-file))
 #+END_SRC
 
@@ -878,4 +876,10 @@ pub global activate dart_language_server
   :config
   (setq dart-sdk-path "/Users/Hassel/flutter/bin/cache/dart-sdk/")
   (add-hook 'dart-mode-hook #'my-dart-mode-init))
+#+END_SRC
+
+* Git timemachine
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package git-timemachine)
 #+END_SRC

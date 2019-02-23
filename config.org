@@ -94,6 +94,9 @@ To switch between them. To to [[Package or straight]].
 * General and theme
 
 #+BEGIN_SRC emacs-lisp :tangle yes
+(set-language-environment "Latin-1")
+(setq default-input-method "latin-1-prefix")
+
 (setq-default tab-width 4)
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
@@ -570,58 +573,6 @@ To switch between them. To to [[Package or straight]].
   (editorconfig-mode 1))
 #+END_SRC
 
-* Org mode
-#+BEGIN_SRC emacs-lisp :tangle yes
-;; org-mode: Don't ruin S-arrow to switch windows please (use M-+ and M-- instead to toggle)
-(setq org-replace-disputed-keys t)
-
-;; Fontify org-mode code blocks
-(setq org-src-fontify-natively t)
-
-(defun my-org-mode-setup ()
-  (define-key org-mode-map (kbd "M-p") 'ace-window)
-  (define-key org-mode-map (kbd "C-j") 'avy-goto-word-1))
-(add-hook 'org-mode-hook #'my-org-mode-setup)
-
-(setq org-todo-keywords
-'((sequence "TODO(t)" "|" "DONE(d)")
-  (sequence "TOREPORT(r)" "|" "REPORTED(b)")))
-
-(use-package org-jira
-  :config
-  ;;(setq request-message-level 'debug)
-  ;;(setq request-log-level 'debug)
-  (setq jiralib-url "https://kudosco.atlassian.net/"))
-
-
-(setq org-directory "~/org")
-(setq org-default-notes-file (concat org-directory "/notes.org"))
-(setq org-default-refile-file (concat org-directory "/refile.org"))
-(define-key global-map (kbd "C-c c") 'org-capture)
-
-(setq org-capture-templates
-	'(("t" "Todo" entry (file org-default-refile-file)
-	   "* TODO %?\n%U" :empty-lines 1)
-	  ("T" "Todo with Clipboard" entry (file org-default-refile-file)
-	   "* TODO %?\n%U\n   %c" :empty-lines 1)
-	  ("n" "Note" entry (file org-default-refile-file)
-	   "* NOTE %?\n%U" :empty-lines 1)
-	  ("N" "Note with Clipboard" entry (file org-default-refile-file)
-	   "* NOTE %?\n%U\n   %c" :empty-lines 1)
-	  ("e" "Event" entry (file+headline org-default-refile-file "Transient")
-	   "* EVENT %?\n%U" :empty-lines 1)
-	  ("E" "Event With Clipboard" entry (file+headline org-default-refile-file "Transient")
-	   "* EVENT %?\n%U\n   %c" :empty-lines 1))
-	)
-
-(require 'ox-md)
-(require 'ox-man)
-
-(use-package org-ref)
-(use-package org-repo-todo)
-
-#+END_SRC
-
 * Ace window
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -735,7 +686,7 @@ To switch between them. To to [[Package or straight]].
 
 (use-package major-mode-hydra
   :after pretty-hydra
-  :bind ("C-M-g" . major-mode-hydra)
+  :bind ("C-M-h" . major-mode-hydra)
   :straight
     (major-mode-hydra
       :type git
@@ -804,7 +755,7 @@ _j_: Prettier
   ("b" magit-blame)
   ("t" helm-projectile-switch-project))
 
-(global-set-key (kbd "M-C-g") 'hydra-global/body)
+(global-set-key (kbd "C-M-g") 'hydra-global/body)
 #+END_SRC
 
 * Yasnippet
@@ -892,3 +843,60 @@ pub global activate dart_language_server
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package git-timemachine)
 #+END_SRC
+* Org mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; org-mode: Don't ruin S-arrow to switch windows please (use M-+ and M-- instead to toggle)
+(setq org-replace-disputed-keys t)
+
+;; Fontify org-mode code blocks
+(setq org-src-fontify-natively t)
+
+(defun my-org-mode-setup ()
+  (define-key org-mode-map (kbd "M-p") 'ace-window)
+  (define-key org-mode-map (kbd "C-j") 'avy-goto-word-1))
+(add-hook 'org-mode-hook #'my-org-mode-setup)
+
+(setq org-todo-keywords
+'((sequence "TODO(t)" "|" "DONE(d)")
+  (sequence "TOREPORT(r)" "|" "REPORTED(b)")))
+
+(use-package org-jira
+  :config
+  ;;(setq request-message-level 'debug)
+  ;;(setq request-log-level 'debug)
+  (setq jiralib-url "https://kudosco.atlassian.net/"))
+
+
+(setq org-directory "~/org")
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-default-refile-file (concat org-directory "/refile.org"))
+(define-key global-map (kbd "C-c c") 'org-capture)
+
+(setq org-capture-templates
+	'(("t" "Todo" entry (file org-default-refile-file)
+	   "* TODO %?\n%U" :empty-lines 1)
+	  ("T" "Todo with Clipboard" entry (file org-default-refile-file)
+	   "* TODO %?\n%U\n   %c" :empty-lines 1)
+	  ("n" "Note" entry (file org-default-refile-file)
+	   "* NOTE %?\n%U" :empty-lines 1)
+	  ("N" "Note with Clipboard" entry (file org-default-refile-file)
+	   "* NOTE %?\n%U\n   %c" :empty-lines 1)
+	  ("e" "Event" entry (file+headline org-default-refile-file "Transient")
+	   "* EVENT %?\n%U" :empty-lines 1)
+	  ("E" "Event With Clipboard" entry (file+headline org-default-refile-file "Transient")
+	   "* EVENT %?\n%U\n   %c" :empty-lines 1))
+	)
+
+(require 'ox-md)
+(require 'ox-man)
+
+(use-package org-ref)
+(use-package org-repo-todo)
+
+(major-mode-hydra-bind org-mode "Clock"
+  ("i" org-clock-in "clock-in")
+  ("o" org-clock-out "clock-out")
+  ("r" org-clock-repor "report"))
+
+#+END_SRC
+

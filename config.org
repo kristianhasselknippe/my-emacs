@@ -1,3 +1,4 @@
+
 * Readme
 ** Switching package manager
 This configuration can either use package or straight for its package management.
@@ -8,7 +9,7 @@ To switch between them. To to [[Package or straight]].
 - To use package, set the variable to "package".
 - To use straight, set the variable to "straight".
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq which-package-manager-to-use "straight")
+(setq which-package-manager-to-use "package")
 #+END_SRC
 
 ** Using package
@@ -34,7 +35,8 @@ To switch between them. To to [[Package or straight]].
 	(package-refresh-contents)
 	(package-install 'use-package))
 
-  (require 'use-package))
+  (require 'use-package)
+  (setq use-package-always-ensure t))
 #+END_SRC
 
 ** Using straight
@@ -59,10 +61,15 @@ To switch between them. To to [[Package or straight]].
 
 *** Install use-package
 #+BEGIN_SRC emacs-lisp :tangle yes
-(straight-use-package 'use-package)
-(setq straight-use-package-by-default t)
+(when (string= which-package-manager-to-use "straight")
+  (straight-use-package 'use-package)
+  (setq straight-use-package-by-default t))
 #+END_SRC
 
+* Flymake
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package flymake)
+#+END_SRC
 * Magit
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -86,8 +93,6 @@ To switch between them. To to [[Package or straight]].
 
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq delete-by-moving-to-trash t)
-
-(use-package magit-todos)
 
 #+END_SRC
 
@@ -180,27 +185,20 @@ To switch between them. To to [[Package or straight]].
   :hook ((typescript-mode) . company-mode))
 
 (defun setup-company-mode ()
-  (setq company-tooltip-align-annotations t)
+;;  (setq company-tooltip-align-annotations t)
+  (define-key company-active-map (kbd "C-c C-c") 'company-complete)
   (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
   (define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort))
 (add-hook 'company-mode-hook #'setup-company-mode)
 
 (setq company-dabbrev-downcase 0)
-(setq company-idle-delay 0)
+(setq company-idle-delay 0.2)
 #+END_SRC
 
 * Nxml
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-
-(use-package nxml-mode
-  :straight 'nil
-  :mode "\\.ux\\'"
-  :config
-  (setq tab-width 4)
-  (setq indent-tabs-mode nil)
-  (add-hook 'nxml-mode-hook #'rainbow-mode))
-
+(require 'nxml-mode)
 #+END_SRC
 
 * Asm
@@ -300,10 +298,9 @@ To switch between them. To to [[Package or straight]].
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package lsp-mode
   :commands (lsp lsp-mode)
-  :bind (("C-c C-r" . 'lsp-find-references)))
-
-(add-hook 'dart-mode-hook #'lsp)
-(add-hook 'rust-mode-hook #'lsp)
+  :bind 
+  (("C-c C-r" . 'lsp-find-references)
+   ("C-c C-c" . #'company-complete)))
 #+END_SRC
 
 ** Require all the built in lsp clients
@@ -314,16 +311,13 @@ To switch between them. To to [[Package or straight]].
 ** Company integration
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package company-lsp
-  :commands company-lsp
-  :after (company lsp-mode)
-  :bind ("C-c C-c" . #'company-complete)
   :config (push 'company-lsp company-backends))
 
 #+END_SRC
 
 ** LSP UI
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package lsp-ui
   :after lsp-mode
   :commands lsp-ui-mode)
@@ -341,7 +335,7 @@ To switch between them. To to [[Package or straight]].
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defun my-rust-mode-setup ()
   (company-mode)
-  (lsp-mode))
+  (lsp))
 (use-package rust-mode
   :mode "\\.rs\\'"
   :bind (:map rust-mode-map
@@ -445,11 +439,10 @@ To switch between them. To to [[Package or straight]].
 (add-hook 'rg-mode-hook #'my-rg-mode-setup)
 #+END_SRC
 
-* Tide (TypeScript)
+* TypeScript
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defun setup-tide-mode (mode-map)
-  (interactive)
   (tide-setup)
   (flycheck-mode +1)
   (eldoc-mode +1)
@@ -466,11 +459,14 @@ To switch between them. To to [[Package or straight]].
   (define-key mode-map (kbd "C-c r") 'tide-rename-symbol)
   (define-key mode-map (kbd "C-c i") 'helm-imenu))
 
+(defun setup-typescript-lsp-mode (mode-map)
+  (lsp))
+
 (use-package tide)
 
 (use-package typescript-mode
   :mode ("\\.ts\\'" "\\.tsx\\'"))
-(add-hook 'typescript-mode-hook (lambda () (setup-tide-mode typescript-mode-map)))
+(add-hook 'typescript-mode-hook (lambda () (setup-typescript-lsp-mode typescript-mode-map)))
 
 (use-package web-mode
   :mode "\\.tsx\\'" "\\.cshtml\\'")
@@ -478,14 +474,18 @@ To switch between them. To to [[Package or straight]].
 		  (lambda ()
 			(when (string-equal "tsx" (file-name-extension buffer-file-name))
 			  (setup-tide-mode web-mode-map))))
-(flycheck-add-mode 'typescript-tslint 'web-mode)
+;;(flycheck-add-mode 'typescript-tslint 'web-mode)
 #+END_SRC
 
 * Restclient
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package restclient-mode
-  :straight restclient
-  :mode ("\\.http\\'"))
+;;(if (string= which-package-manager-to-use "straight")
+;;  (use-package restclient-mode
+;;    :straight restclient
+;;    :mode ("\\.http\\'")))
+  (use-package restclient-mode
+    :ensure restclient
+    :mode ("\\.http\\'"))
 #+END_SRC
 
 * Counsel
@@ -677,21 +677,21 @@ To switch between them. To to [[Package or straight]].
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package hydra)
 
-(use-package pretty-hydra
-  :straight
-    (pretty-hydra
-      :type git
-      :host github
-      :repo "jerrypnz/major-mode-hydra.el"))
+;;(use-package pretty-hydra
+;;  :straight
+;;    (pretty-hydra
+;;      :type git
+;;      :host github
+;;      :repo "jerrypnz/major-mode-hydra.el"))
 
-(use-package major-mode-hydra
-  :after pretty-hydra
-  :bind ("C-M-h" . major-mode-hydra)
-  :straight
-    (major-mode-hydra
-      :type git
-      :host github
-      :repo "jerrypnz/major-mode-hydra.el"))
+;;(use-package major-mode-hydra
+;;  :after pretty-hydra
+;;  :bind ("C-M-h" . major-mode-hydra))
+;;  :straight
+;;    (major-mode-hydra
+;;      :type git
+;;      :host github
+;;      :repo "jerrypnz/major-mode-hydra.el"))
 
 (defun start-eshell-in-current-dir ()
   (interactive)
@@ -829,6 +829,7 @@ pub global activate dart_language_server
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defun my-dart-mode-init ()
+  (lsp)
   (flycheck-mode))
 
 (use-package dart-mode
@@ -893,10 +894,10 @@ pub global activate dart_language_server
 (use-package org-ref)
 (use-package org-repo-todo)
 
-(major-mode-hydra-bind org-mode "Clock"
-  ("i" org-clock-in "clock-in")
-  ("o" org-clock-out "clock-out")
-  ("r" org-clock-repor "report"))
+;;(major-mode-hydra-bind org-mode "Clock"
+;;  ("i" org-clock-in "clock-in")
+;;  ("o" org-clock-out "clock-out")
+;;  ("r" org-clock-repor "report"))
 
 #+END_SRC
 

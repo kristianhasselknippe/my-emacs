@@ -861,13 +861,6 @@ pub global activate dart_language_server
 '((sequence "TODO(t)" "|" "DONE(d)")
   (sequence "TOREPORT(r)" "|" "REPORTED(b)")))
 
-(use-package org-jira
-  :config
-  ;;(setq request-message-level 'debug)
-  ;;(setq request-log-level 'debug)
-  (setq jiralib-url "https://kudosco.atlassian.net/"))
-
-
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-default-refile-file (concat org-directory "/refile.org"))

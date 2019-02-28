@@ -529,6 +529,15 @@ To switch between them. To to [[Package or straight]].
 (use-package rainbow-mode)
 #+END_SRC
 
+* Projectile
+#+BEGIN_SRC emacs-lisp :tangle yes
+(require 'projectile)
+(setq projectile-indexing-method 'alien)
+
+;;Workaround for https://github.com/bbatsov/projectile/issues/1302
+(setq projectile-git-submodule-command 'nil)
+#+END_SRC
+
 * Helm projectile
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package helm-projectile

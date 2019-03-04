@@ -9,6 +9,9 @@
 	(company-pseudo-tooltip-frontend company-echo-metadata-frontend)))
  '(company-minimum-prefix-length 2)
  '(cursor-type (quote (bar . 3)))
+ '(custom-safe-themes
+   (quote
+	("bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" "monokai" default)))
  '(display-line-numbers t)
  '(global-company-mode t)
  '(global-git-gutter-mode t)
@@ -51,10 +54,10 @@
  '(lsp-ui-sideline-show-code-actions nil)
  '(nxml-child-indent 4)
  '(omnisharp-server-executable-path nil)
- '(org-clock-persist t)
+ '(org-clock-persist (quote clock))
  '(package-selected-packages
    (quote
-	(projectile-ripgrep dap-mode spotify magit-todos org-repo-todo org-ref flycheck org-jira lsp-rust which-key alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree expand-region wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
+	(org-clock-today projectile-ripgrep dap-mode spotify magit-todos org-repo-todo org-ref flycheck org-jira lsp-rust which-key alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree expand-region wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
  '(rg-command-line-flags nil)
  '(ring-bell-function (quote ignore))
  '(web-mode-enable-auto-expanding t)

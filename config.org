@@ -29,7 +29,8 @@ To switch between them. To to [[Package or straight]].
 
   (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
-  (package-initialize)
+(when (< emacs-major-version 27)
+  (package-initialize))
 
   (unless (package-installed-p 'use-package)
 	(package-refresh-contents)
@@ -107,7 +108,9 @@ To switch between them. To to [[Package or straight]].
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
 
-(use-package monokai-theme)
+(use-package monokai-theme
+   :config
+   (load-theme 'monokai t))
 
 (set-face-foreground 'font-lock-comment-face "light pink")
 (setq-default c-basic-offset 4)
@@ -298,8 +301,9 @@ To switch between them. To to [[Package or straight]].
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package lsp-mode
   :commands (lsp lsp-mode)
-  :bind 
+  :bind
   (("C-c C-r" . 'lsp-find-references)
+  ("C-c r" . 'lsp-rename)
    ("C-c C-c" . #'company-complete)))
 #+END_SRC
 
@@ -543,7 +547,8 @@ To switch between them. To to [[Package or straight]].
 (use-package helm-projectile
   :config
   (projectile-global-mode)
-  (global-set-key (kbd "C-c t") 'helm-projectile-find-file))
+  (global-set-key (kbd "C-c t") 'helm-projectile-find-file)
+  (global-set-key (kbd "C-c s") 'helm-projectile-switch-project))
 #+END_SRC
 
 * Change window size
@@ -873,6 +878,10 @@ pub global activate dart_language_server
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-default-refile-file (concat org-directory "/refile.org"))
+
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
 (define-key global-map (kbd "C-c c") 'org-capture)
 
 (setq org-capture-templates

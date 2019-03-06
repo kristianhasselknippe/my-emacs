@@ -10,6 +10,9 @@
  '(company-minimum-prefix-length 2)
  '(cursor-type (quote (bar . 3)))
  '(display-line-numbers t)
+ '(elfeed-feeds
+   (quote
+	("https://www.reddit.com/r/idris/.rss" "https://www.reddit.com/r/compilers/.rss" "https://www.reddit.com/r/gamedev/.rss" "https://www.reddit.com/r/typescript/.rss" "https://www.reddit.com/r/emacs/.rss" "https://www.reddit.com/r/programming/.rss" "https://www.reddit.com/r/programming")))
  '(global-company-mode t)
  '(global-git-gutter-mode t)
  '(global-whitespace-mode t)

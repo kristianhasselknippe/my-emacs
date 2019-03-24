@@ -13,9 +13,6 @@
    (quote
 	("bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" "monokai" default)))
  '(display-line-numbers t)
- '(elfeed-feeds
-   (quote
-	("https://www.reddit.com/r/idris/.rss" "https://www.reddit.com/r/compilers/.rss" "https://www.reddit.com/r/gamedev/.rss" "https://www.reddit.com/r/typescript/.rss" "https://www.reddit.com/r/emacs/.rss" "https://www.reddit.com/r/programming/.rss" "https://www.reddit.com/r/programming")))
  '(global-company-mode t)
  '(global-git-gutter-mode t)
  '(global-whitespace-mode t)
@@ -56,18 +53,11 @@
  '(lsp-ui-sideline-enable nil)
  '(lsp-ui-sideline-show-code-actions nil)
  '(nxml-child-indent 4)
- '(omnisharp-completing-read-function (quote helm--completing-read-default))
  '(omnisharp-expected-server-version "1.32.11")
  '(omnisharp-server-executable-path nil)
- '(org-agenda-clock-consistency-checks
+ '(org-agenda-files
    (quote
-	(:max-duration "10:00" :min-duration 0 :max-gap "0:05" :gap-ok-around
-				   ("4:00")
-				   :default-face
-				   ((:background "DarkRed")
-					(:foreground "white"))
-				   :overlap-face nil :gap-face nil :no-end-time-face nil :long-face nil :short-face nil)))
- '(org-agenda-files (quote ("~/org/timesheet.org")))
+	("~/org/timesheet.org" "~/org/nortero/projects/SNVSpektrum/venyouscanner.org")))
  '(org-clock-persist (quote clock))
  '(package-selected-packages
    (quote
@@ -86,4 +76,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(web-mode-comment-face ((t (:foreground "light pink"))))
  '(whitespace-big-indent ((t nil))))

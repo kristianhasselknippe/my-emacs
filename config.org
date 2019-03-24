@@ -463,14 +463,14 @@ To switch between them. To to [[Package or straight]].
   (define-key mode-map (kbd "C-c r") 'tide-rename-symbol)
   (define-key mode-map (kbd "C-c i") 'helm-imenu))
 
-(defun setup-typescript-lsp-mode (mode-map)
+(defun setup-typescript-lsp-mode ()
   (lsp))
 
 (use-package tide)
 
 (use-package typescript-mode
   :mode ("\\.ts\\'" "\\.tsx\\'"))
-(add-hook 'typescript-mode-hook (lambda () (setup-typescript-lsp-mode typescript-mode-map)))
+(add-hook 'typescript-mode-hook (lambda () (setup-tide-mode typescript-mode-map)))
 
 (use-package web-mode
   :mode "\\.tsx\\'" "\\.cshtml\\'")

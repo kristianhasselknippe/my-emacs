@@ -13,9 +13,6 @@
    (quote
 	("bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" "monokai" default)))
  '(display-line-numbers t)
- '(elfeed-feeds
-   (quote
-	("https://www.reddit.com/r/idris/.rss" "https://www.reddit.com/r/compilers/.rss" "https://www.reddit.com/r/gamedev/.rss" "https://www.reddit.com/r/typescript/.rss" "https://www.reddit.com/r/emacs/.rss" "https://www.reddit.com/r/programming/.rss" "https://www.reddit.com/r/programming")))
  '(global-company-mode t)
  '(global-git-gutter-mode t)
  '(global-whitespace-mode t)
@@ -56,6 +53,7 @@
  '(lsp-ui-sideline-enable nil)
  '(lsp-ui-sideline-show-code-actions nil)
  '(nxml-child-indent 4)
+ '(omnisharp-expected-server-version "1.32.8")
  '(omnisharp-server-executable-path nil)
  '(org-agenda-files
    (quote

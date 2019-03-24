@@ -56,11 +56,22 @@
  '(lsp-ui-sideline-enable nil)
  '(lsp-ui-sideline-show-code-actions nil)
  '(nxml-child-indent 4)
+ '(omnisharp-completing-read-function (quote helm--completing-read-default))
+ '(omnisharp-expected-server-version "1.32.11")
  '(omnisharp-server-executable-path nil)
+ '(org-agenda-clock-consistency-checks
+   (quote
+	(:max-duration "10:00" :min-duration 0 :max-gap "0:05" :gap-ok-around
+				   ("4:00")
+				   :default-face
+				   ((:background "DarkRed")
+					(:foreground "white"))
+				   :overlap-face nil :gap-face nil :no-end-time-face nil :long-face nil :short-face nil)))
+ '(org-agenda-files (quote ("~/org/timesheet.org")))
  '(org-clock-persist (quote clock))
  '(package-selected-packages
    (quote
-	(org-clock-today projectile-ripgrep dap-mode spotify magit-todos org-repo-todo org-ref flycheck org-jira lsp-rust which-key alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree expand-region wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
+	(alchemist elixir-mode git-timemachine helm-git-grep org-clock-today projectile-ripgrep dap-mode spotify magit-todos org-repo-todo org-ref flycheck org-jira lsp-rust which-key alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree expand-region wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
  '(rg-command-line-flags nil)
  '(ring-bell-function (quote ignore))
  '(web-mode-enable-auto-expanding t)

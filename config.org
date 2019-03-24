@@ -912,3 +912,10 @@ pub global activate dart_language_server
 
 #+END_SRC
 
+* Elixir
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package elixir-mode
+  :init
+  (add-hook 'elixir-mode-hook #'company-mode))
+(use-package alchemist)
+#+END_SRC

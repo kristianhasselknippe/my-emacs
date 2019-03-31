@@ -447,6 +447,7 @@ To switch between them. To to [[Package or straight]].
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defun setup-tide-mode (mode-map)
+  (interactive)
   (tide-setup)
   (flycheck-mode +1)
   (eldoc-mode +1)
@@ -463,9 +464,6 @@ To switch between them. To to [[Package or straight]].
   (define-key mode-map (kbd "C-c r") 'tide-rename-symbol)
   (define-key mode-map (kbd "C-c i") 'helm-imenu))
 
-(defun setup-typescript-lsp-mode ()
-  (lsp))
-
 (use-package tide)
 
 (use-package typescript-mode
@@ -478,7 +476,7 @@ To switch between them. To to [[Package or straight]].
 		  (lambda ()
 			(when (string-equal "tsx" (file-name-extension buffer-file-name))
 			  (setup-tide-mode web-mode-map))))
-;;(flycheck-add-mode 'typescript-tslint 'web-mode)
+(flycheck-add-mode 'typescript-tslint 'web-mode)
 #+END_SRC
 
 * Restclient
@@ -912,10 +910,17 @@ pub global activate dart_language_server
 
 #+END_SRC
 
+
 * Elixir
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package elixir-mode
   :init
   (add-hook 'elixir-mode-hook #'company-mode))
 (use-package alchemist)
+#+END_SRC
+
+* Powerline
+#+BEGIN_SRC elisp :tangle yes
+(use-package powerline
+  :config (powerline-default-theme))
 #+END_SRC

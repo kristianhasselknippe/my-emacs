@@ -8,6 +8,7 @@
    (quote
 	(company-pseudo-tooltip-frontend company-echo-metadata-frontend)))
  '(company-minimum-prefix-length 2)
+ '(company-require-match nil)
  '(cursor-type (quote (bar . 3)))
  '(custom-safe-themes
    (quote
@@ -53,7 +54,8 @@
  '(lsp-ui-sideline-enable nil)
  '(lsp-ui-sideline-show-code-actions nil)
  '(nxml-child-indent 4)
- '(omnisharp-expected-server-version "1.32.11")
+ '(omnisharp-company-begin-after-member-access nil)
+ '(omnisharp-expected-server-version "1.32.4")
  '(omnisharp-server-executable-path nil)
  '(org-agenda-files
    (quote

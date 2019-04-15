@@ -81,4 +81,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(web-mode-comment-face ((t (:foreground "light pink"))))
- '(whitespace-big-indent ((t nil))))
+ '(whitespace-big-indent ((t nil)))
+ '(whitespace-hspace ((((class color) (min-colors 257)) (:background unspecified :foreground "#75715E" :inverse-video unspecified)) (((class color) (min-colors 89)) (:background unspecified :foreground "#75715E" :inverse-video unspecified))))
+ '(whitespace-indentation ((((class color) (min-colors 257)) (:background unspecified :foreground "#75715E" :inverse-video unspecified :weight bold)) (((class color) (min-colors 89)) (:background unspecified :foreground "#75715E" :inverse-video unspecified :weight bold)))))

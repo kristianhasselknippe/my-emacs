@@ -185,7 +185,9 @@ To switch between them. To to [[Package or straight]].
 
 (use-package company
   :commands company-mode
-  :hook ((typescript-mode) . company-mode))
+  :hook 
+    ((typescript-mode . company-mode)
+    (flow-minor-mode . company-mode)))
 
 (defun setup-company-mode ()
 ;;  (setq company-tooltip-align-annotations t)
@@ -472,12 +474,28 @@ To switch between them. To to [[Package or straight]].
 (add-hook 'typescript-mode-hook (lambda () (setup-tide-mode typescript-mode-map)))
 
 (use-package web-mode
-  :mode "\\.tsx\\'" "\\.cshtml\\'")
+  :mode "\\.tsx\\'" "\\.cshtml\\'" "\\.js\\'" "\\.jsx\\'")
 (add-hook 'web-mode-hook
 		  (lambda ()
 			(when (string-equal "tsx" (file-name-extension buffer-file-name))
 			  (setup-tide-mode web-mode-map))))
 (flycheck-add-mode 'typescript-tslint 'web-mode)
+#+END_SRC
+
+* Flow
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package flow-minor-mode
+  :bind (:map flow-minor-mode-map
+			  ("C-c C-c" . 'company-complete))
+  :config
+  (add-hook 'web-mode-hook 'flow-minor-enable-automatically))
+
+(use-package company-flow
+  :config
+  (with-eval-after-load 'company
+  (add-to-list 'company-backends 'company-flow)))
+
 #+END_SRC
 
 * Restclient
@@ -656,7 +674,7 @@ To switch between them. To to [[Package or straight]].
 (use-package expand-region
   :config (global-set-key
 	   (if (string= system-type "darwin")
-		   (kbd "C-@")
+		   (kbd "C-'")
 		 (kbd "C-'")) 'er/expand-region))
 #+END_SRC
 
@@ -924,4 +942,9 @@ pub global activate dart_language_server
 #+BEGIN_SRC elisp :tangle yes
 (use-package powerline
   :config (powerline-default-theme))
+#+END_SRC
+* Multi-term
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package multi-term
+  :bind (("M-p" . 'ace-window)))
 #+END_SRC

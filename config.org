@@ -582,7 +582,8 @@ To switch between them. To to [[Package or straight]].
   :config
   (global-set-key (kbd "C-S-p") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-S-n") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-x r t") 'mc/edit-lines))
+  (global-set-key (kbd "C-x r t") 'mc/edit-lines)
+  (define-key mc/keymap (kbd "<return>") nil))
 #+END_SRC
 
 * Emacs-Lisp :Tangle Yes

@@ -306,17 +306,17 @@ To switch between them. To to [[Package or straight]].
 
 ** LSP mode
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package lsp-mode
-  :commands (lsp lsp-mode)
-  :bind
-  (("C-c C-r" . 'lsp-find-references)
-  ("C-c r" . 'lsp-rename)
-   ("C-c C-c" . #'company-complete)))
+;;(use-package lsp-mode
+;;  :commands (lsp lsp-mode)
+;;  :bind
+;;  (("C-c C-r" . 'lsp-find-references)
+;;  ("C-c r" . 'lsp-rename)
+;;   ("C-c C-c" . #'company-complete)))
 #+END_SRC
 
 ** Require all the built in lsp clients
 #+BEGIN_SRC emacs-lisp :tangle yes
-(require 'lsp-clients)
+;;(require 'lsp-clients)
 #+END_SRC
 
 ** Company integration
@@ -813,11 +813,26 @@ _j_: Prettier
 * Swift
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package swift-mode)
+(use-package swift-mode
+  :hook (swift-mode . (lambda ()
+  ;;(lsp-mode)
+  (company-mode)
+)))
 
 (use-package flycheck-swift3)
 (with-eval-after-load 'flycheck
   (add-hook 'flycheck-mode-hook #'flycheck-swift3-setup))
+
+;;(use-package company-sourcekit
+;;  :config
+;;  (add-to-list 'company-backends 'company-sourcekit))
+
+;;(when (string= system-type "darwin")
+;;  (use-package lsp-sourcekit
+;;    :after lsp-mode
+;;    :config
+;;    (setenv "SOURCEKIT_TOOLCHAIN_PATH" "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain")
+;;    (setq lsp-sourcekit-executable (expand-file-name "~/sourcekit-lsp/.build/x86_64-apple-macosx10.10/debug/"))))
 #+END_SRC
 
 * Alert

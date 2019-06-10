@@ -67,6 +67,10 @@ To switch between them. To to [[Package or straight]].
   (setq straight-use-package-by-default t))
 #+END_SRC
 
+* Sane defaults
+#+BEGIN_SRC emacs-lisp :tangle yes
+(global-auto-revert-mode t)
+#+END_SRC
 * Flymake
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package flymake)

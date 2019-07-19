@@ -551,12 +551,12 @@ To switch between them. To to [[Package or straight]].
 
 * Rainbow mode
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package rainbow-mode)
+;;(use-package rainbow-mode)
 #+END_SRC
 
 * Projectile
 #+BEGIN_SRC emacs-lisp :tangle yes
-(require 'projectile)
+(use-package projectile)
 (setq projectile-indexing-method 'alien)
 
 ;;Workaround for https://github.com/bbatsov/projectile/issues/1302
@@ -774,18 +774,19 @@ _s_: start server
 ^Misc^                    ^Git^      ^Projectile^
 ^^^^^^^^-----------------------------------------
 _g_: Revert buffer       _b_: Blame  _t_: Switch project
-_l_: Whitespace cleanup  _d_: Diff
+_l_: Whitespace cleanup 
 _c_: Goto last change
 _e_: Error list
 _w_: Compilet
 _j_: Prettier
 _z_: Zig build
+_d_
 "
   ("g" revert-buffer)
   ("l" whitespace-cleanup)
   ("c" goto-last-change)
   ("e" flycheck-list-errors)
-  ("d" magit-diff-popup)
+  ("d" helm-dash)
   ("w" compile)
   ("j" prettier-js)
   ("E" start-eshell-in-current-dir)

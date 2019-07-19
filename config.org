@@ -779,6 +779,7 @@ _c_: Goto last change
 _e_: Error list
 _w_: Compilet
 _j_: Prettier
+_z_: Zig build
 "
   ("g" revert-buffer)
   ("l" whitespace-cleanup)
@@ -789,7 +790,8 @@ _j_: Prettier
   ("j" prettier-js)
   ("E" start-eshell-in-current-dir)
   ("b" magit-blame)
-  ("t" helm-projectile-switch-project))
+  ("t" helm-projectile-switch-project)
+  ("z" zig-build))
 
 (global-set-key (kbd "C-M-g") 'hydra-global/body)
 #+END_SRC
@@ -971,4 +973,21 @@ pub global activate dart_language_server
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package multi-term
   :bind (("M-p" . 'ace-window)))
+#+END_SRC
+* Zig mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package zig-mode)
+#+END_SRC
+
+* Dash
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package helm-dash
+:config
+(setq helm-dash-common-docsets '("OpenGL4"))
+
+(defun dash-open-file (path)
+  (with-temp-buffer
+    (insert-file-contents (substring-no-properties path 8))
+    (shr-render-buffer (current-buffer))))
+
 #+END_SRC

@@ -984,7 +984,7 @@ pub global activate dart_language_server
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package helm-dash
 :config
-(setq helm-dash-common-docsets '("OpenGL4"))
+(setq helm-dash-common-docsets '("OpenGL4")))
 
 (defun dash-open-file (path)
   (with-temp-buffer

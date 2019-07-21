@@ -780,6 +780,7 @@ _e_: Error list
 _w_: Compilet
 _j_: Prettier
 _z_: Zig build
+_f_: Zig fmt
 _d_
 "
   ("g" revert-buffer)
@@ -792,7 +793,9 @@ _d_
   ("E" start-eshell-in-current-dir)
   ("b" magit-blame)
   ("t" helm-projectile-switch-project)
-  ("z" zig-build))
+  ("z" zig-build)
+  ("f" zig-fmt)
+)
 
 (global-set-key (kbd "C-M-g") 'hydra-global/body)
 #+END_SRC

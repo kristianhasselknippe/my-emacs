@@ -478,11 +478,7 @@ To switch between them. To to [[Package or straight]].
 (add-hook 'typescript-mode-hook (lambda () (setup-tide-mode typescript-mode-map)))
 
 (use-package web-mode
-  :mode "\\.tsx\\'" "\\.cshtml\\'" "\\.js\\'" "\\.jsx\\'")
-(add-hook 'web-mode-hook
-		  (lambda ()
-			(when (string-equal "tsx" (file-name-extension buffer-file-name))
-			  (setup-tide-mode web-mode-map))))
+  :mode "\\.cshtml\\'")
 (flycheck-add-mode 'typescript-tslint 'web-mode)
 #+END_SRC
 
@@ -994,4 +990,13 @@ pub global activate dart_language_server
     (insert-file-contents (substring-no-properties path 8))
     (shr-render-buffer (current-buffer))))
 
+#+END_SRC
+* JSX/TSX
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun my-rjsx-mode-init ()
+  (flycheck-mode))
+(use-package rjsx-mode
+  :mode "\\.tsx\\'"
+  :config
+  (add-hook 'rjsx-mode-hook 'my-rjsx-mode-init))
 #+END_SRC

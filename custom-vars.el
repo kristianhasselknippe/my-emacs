@@ -13,6 +13,7 @@
  '(custom-safe-themes
    (quote
 	("bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" "monokai" default)))
+ '(dash-docs-browser-func (quote dash-open-file))
  '(display-line-numbers t)
  '(flycheck-temp-prefix ".flycheck")
  '(global-company-mode t)
@@ -45,6 +46,26 @@
 	 (dired-do-hardlink . helm-read-file-name-handler-1)
 	 (make-directory))))
  '(helm-mode t)
+ '(hl-todo-keyword-faces
+   (quote
+	(("HOLD" . "#d0bf8f")
+	 ("TODO" . "#ff0000")
+	 ("NEXT" . "#dca3a3")
+	 ("THEM" . "#dc8cc3")
+	 ("PROG" . "#7cb8bb")
+	 ("OKAY" . "#7cb8bb")
+	 ("DONT" . "#5f7f5f")
+	 ("FAIL" . "#8c5353")
+	 ("DONE" . "#afd8af")
+	 ("NOTE" . "#d0bf8f")
+	 ("KLUDGE" . "#d0bf8f")
+	 ("HACK" . "#d0bf8f")
+	 ("TEMP" . "#d0bf8f")
+	 ("FIXME" . "#cc9393")
+	 ("XXX+" . "#cc9393")
+	 ("\\?\\?\\?+" . "#cc9393"))))
+ '(js2-missing-semi-one-line-override t)
+ '(js2-strict-missing-semi-warning nil)
  '(lsp-clients-dart-server-command "dart_language_server")
  '(lsp-clients-javascript-typescript-server "typescript-language-server")
  '(lsp-log-max 100000)
@@ -64,10 +85,11 @@
  '(org-clock-persist (quote clock))
  '(package-selected-packages
    (quote
-	(multi-term company-flow flow-minor-mode powerline org-clock-today projectile-ripgrep dap-mode spotify magit-todos org-repo-todo org-ref flycheck org-jira lsp-rust which-key alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree expand-region wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
+	(haskell-mode rjsx-mode hl-todo devdocs glsl-mode w3m helm-dash zig-mode multi-term company-flow flow-minor-mode powerline org-clock-today projectile-ripgrep dap-mode spotify magit-todos org-repo-todo org-ref flycheck org-jira lsp-rust which-key alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree expand-region wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
  '(powerline-default-separator (quote wave))
  '(rg-command-line-flags nil)
  '(ring-bell-function (quote ignore))
+ '(web-mode-auto-close-style 3)
  '(web-mode-enable-auto-expanding t)
  '(web-mode-enable-auto-opening nil)
  '(web-mode-enable-auto-quoting nil)

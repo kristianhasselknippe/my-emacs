@@ -534,10 +534,11 @@ To switch between them. To to [[Package or straight]].
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx)
 
-  (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "/usr/local/bin") ":" (expand-file-name "~/.cargo/bin") ":" (expand-file-name "/Library/Frameworks/Mono.framework/Versions/Current/Commands/")))
+  (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "/usr/local/bin") ":" (expand-file-name "~/.cargo/bin") ":" (expand-file-name "/Library/Frameworks/Mono.framework/Versions/Current/Commands/") ":" (expand-file-name "~/.ghcup/bin")))
   (setq exec-path
 		(append exec-path
 				(list
+				 (expand-file-name "~/.ghcup/bin")
 				 (expand-file-name "/usr/local/bin")
 				 (expand-file-name "/Users/Hassel/.pub-cache/bin")
 				 (expand-file-name "~/.cargo/bin")
@@ -777,13 +778,12 @@ _w_: Compilet
 _j_: Prettier
 _z_: Zig build
 _f_: Zig fmt
-_d_
+_r_: Reload web mode
 "
   ("g" revert-buffer)
   ("l" whitespace-cleanup)
-  ("c" goto-last-change)
+  ("c" goto-last-change :exit nil)
   ("e" flycheck-list-errors)
-  ("d" helm-dash)
   ("w" compile)
   ("j" prettier-js)
   ("E" start-eshell-in-current-dir)
@@ -791,6 +791,7 @@ _d_
   ("t" helm-projectile-switch-project)
   ("z" zig-build)
   ("f" zig-fmt)
+  ("r" web-mode-reload)
 )
 
 (global-set-key (kbd "C-M-g") 'hydra-global/body)
@@ -804,6 +805,13 @@ _d_
   (global-set-key (kbd "C-c <tab>") 'yas-insert-snippet))
 
 (use-package yasnippet-snippets)
+
+(defun yasnippet-helpers/capitalize-first-char (&optional string)
+  "Capitalize only the first character of the input STRING."
+  (when (and string (> (length string) 0))
+    (let ((first-char (substring string nil 1))
+          (rest-str   (substring string 1)))
+      (concat (capitalize first-char) rest-str))))
 #+END_SRC
 
 * Calendar
@@ -991,12 +999,7 @@ pub global activate dart_language_server
     (shr-render-buffer (current-buffer))))
 
 #+END_SRC
-* JSX/TSX
+* Haskell
 #+BEGIN_SRC emacs-lisp :tangle yes
-(defun my-rjsx-mode-init ()
-  (flycheck-mode))
-(use-package rjsx-mode
-  :mode "\\.tsx\\'"
-  :config
-  (add-hook 'rjsx-mode-hook 'my-rjsx-mode-init))
+(use-package haskell-mode)
 #+END_SRC

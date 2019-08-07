@@ -89,11 +89,12 @@
  '(powerline-default-separator (quote wave))
  '(rg-command-line-flags nil)
  '(ring-bell-function (quote ignore))
- '(web-mode-auto-close-style 3)
+ '(web-mode-auto-close-style 1)
  '(web-mode-enable-auto-expanding t)
  '(web-mode-enable-auto-opening nil)
  '(web-mode-enable-auto-quoting nil)
  '(whitespace-line-column 350)
+ '(whitespace-space-before-tab-regexp "")
  '(whitespace-style
    (quote
 	(face trailing tabs spaces empty indentation space-after-tab space-before-tab space-mark tab-mark lsp-rust calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode rg swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package))))

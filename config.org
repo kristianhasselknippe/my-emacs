@@ -302,45 +302,6 @@ To switch between them. To to [[Package or straight]].
 (use-package nodejs-repl)
 #+END_SRC
 
-* LSP (language server protocol)
-
-** LSP mode
-#+BEGIN_SRC emacs-lisp :tangle yes
-;;(use-package lsp-mode
-;;  :commands (lsp lsp-mode)
-;;  :bind
-;;  (("C-c C-r" . 'lsp-find-references)
-;;  ("C-c r" . 'lsp-rename)
-;;   ("C-c C-c" . #'company-complete)))
-#+END_SRC
-
-** Require all the built in lsp clients
-#+BEGIN_SRC emacs-lisp :tangle yes
-;;(require 'lsp-clients)
-#+END_SRC
-
-** Company integration
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package company-lsp
-  :config (push 'company-lsp company-backends))
-
-#+END_SRC
-
-** LSP UI
-
-#+BEGIN_SRC emacs-lisp :tangle no
-(use-package lsp-ui
-  :after lsp-mode
-  :commands lsp-ui-mode)
-#+END_SRC
-
-* DAP (debug adapter protocol)
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package dap-mode)
-(require 'dap-lldb)
-#+END_SRC
-
 * Rust
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -478,7 +439,11 @@ To switch between them. To to [[Package or straight]].
 (add-hook 'typescript-mode-hook (lambda () (setup-tide-mode typescript-mode-map)))
 
 (use-package web-mode
-  :mode "\\.cshtml\\'")
+  :mode "\\.tsx\\'" "\\.cshtml\\'" "\\.js\\'" "\\.jsx\\'")
+(add-hook 'web-mode-hook
+		  (lambda ()
+			(when (string-equal "tsx" (file-name-extension buffer-file-name))
+			  (setup-tide-mode web-mode-map))))
 (flycheck-add-mode 'typescript-tslint 'web-mode)
 #+END_SRC
 
@@ -768,9 +733,9 @@ _s_: start server
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defhydra hydra-global (:color teal)
    "
-^Misc^                    ^Git^      ^Projectile^
-^^^^^^^^-----------------------------------------
-_g_: Revert buffer       _b_: Blame  _t_: Switch project
+^Misc^                    ^Git^      
+^^^^^^^^-----------------------------
+_g_: Revert buffer       _b_: Blame  
 _l_: Whitespace cleanup 
 _c_: Goto last change
 _e_: Error list
@@ -779,6 +744,7 @@ _j_: Prettier
 _z_: Zig build
 _f_: Zig fmt
 _r_: Reload web mode
+_t_: Vterm
 "
   ("g" revert-buffer)
   ("l" whitespace-cleanup)
@@ -788,7 +754,7 @@ _r_: Reload web mode
   ("j" prettier-js)
   ("E" start-eshell-in-current-dir)
   ("b" magit-blame)
-  ("t" helm-projectile-switch-project)
+  ("t" vterm)
   ("z" zig-build)
   ("f" zig-fmt)
   ("r" web-mode-reload)
@@ -1002,4 +968,9 @@ pub global activate dart_language_server
 * Haskell
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package haskell-mode)
+#+END_SRC
+* Vterm
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Vterm is installed using git, so this has to be done by hand
+(define-key vterm-mode-map (kbd "M-p") 'ace-window)
 #+END_SRC

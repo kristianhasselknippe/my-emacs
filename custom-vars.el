@@ -68,6 +68,7 @@
  '(js2-strict-missing-semi-warning nil)
  '(lsp-clients-dart-server-command "dart_language_server")
  '(lsp-clients-javascript-typescript-server "typescript-language-server")
+ '(lsp-log-io nil)
  '(lsp-log-max 100000)
  '(lsp-print-io nil)
  '(lsp-response-timeout 10)
@@ -77,7 +78,7 @@
  '(lsp-ui-sideline-show-code-actions nil)
  '(nxml-child-indent 4)
  '(omnisharp-company-begin-after-member-access nil)
- '(omnisharp-expected-server-version "1.32.4")
+ '(omnisharp-expected-server-version "1.32.20")
  '(omnisharp-server-executable-path nil)
  '(org-agenda-files
    (quote
@@ -103,6 +104,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((((class color) (min-colors 257)) (:foreground "#F8F8F2" :background "#272822")) (((class color) (min-colors 89)) (:foreground "#F5F5F5" :background "#1B1E1C"))))
  '(web-mode-comment-face ((t (:foreground "light pink"))))
  '(whitespace-big-indent ((t nil)))
  '(whitespace-hspace ((((class color) (min-colors 257)) (:background unspecified :foreground "#75715E" :inverse-video unspecified)) (((class color) (min-colors 89)) (:background unspecified :foreground "#75715E" :inverse-video unspecified))))

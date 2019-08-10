@@ -820,6 +820,11 @@ _t_: Vterm
 * Compilation
 
 #+BEGIN_SRC emacs-lisp :tangle yes
+(require 'ansi-color)
+(defun my/ansi-colorize-buffer ()
+  (let ((buffer-read-only nil))
+    (ansi-color-apply-on-region (point-min) (point-max))))
+(add-hook 'compilation-filter-hook 'my/ansi-colorize-buffer)
 (defun my-compilation-mode-init ()
   (define-key compilation-mode-map (kbd "M-p") 'ace-window)
   (define-key compilation-mode-map (kbd "C-M-p") 'ace-delete-window))

@@ -974,8 +974,20 @@ pub global activate dart_language_server
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package haskell-mode)
 #+END_SRC
+* Quelpa
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package quelpa)
+#+END_SRC
+
+* GLSL
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package glsl-mode
+  :mode ("\\.vs\\'" "\\.fs\\'" "\\.gs\\'"))
+#+END_SRC
 * Vterm
 #+BEGIN_SRC emacs-lisp :tangle yes
+(quelpa '(vterm :url "https://github.com/akermu/emacs-libvterm.git" :fetcher git))
+;;(require 'vterm)
 ;; Vterm is installed using git, so this has to be done by hand
-(define-key vterm-mode-map (kbd "M-p") 'ace-window)
+;;(define-key vterm-mode-map (kbd "M-p") 'ace-window)
 #+END_SRC

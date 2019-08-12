@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: stylearr
+# key: stylearr
+# --
+style={[{ $0 }, props.style]}

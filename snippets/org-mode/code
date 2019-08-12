@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: code
+# key: code
+# --
+#+BEGIN_SRC emacs-lisp :tangle yes
+$0
+#+END_SRC

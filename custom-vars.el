@@ -106,5 +106,6 @@
  '(default ((((class color) (min-colors 257)) (:foreground "#F8F8F2" :background "#272822")) (((class color) (min-colors 89)) (:foreground "#F5F5F5" :background "#1B1E1C"))))
  '(web-mode-comment-face ((t (:foreground "light pink"))))
  '(whitespace-big-indent ((t nil)))
+ '(whitespace-empty ((t (:foreground unspecified :inverse-video unspecified))))
  '(whitespace-hspace ((((class color) (min-colors 257)) (:background unspecified :foreground "#75715E" :inverse-video unspecified)) (((class color) (min-colors 89)) (:background unspecified :foreground "#75715E" :inverse-video unspecified))))
  '(whitespace-indentation ((((class color) (min-colors 257)) (:background unspecified :foreground "#75715E" :inverse-video unspecified :weight bold)) (((class color) (min-colors 89)) (:background unspecified :foreground "#75715E" :inverse-video unspecified :weight bold)))))

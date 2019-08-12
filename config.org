@@ -584,22 +584,6 @@ To switch between them. To to [[Package or straight]].
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package avy-zap)
 (define-key global-map (kbd "C-j") 'avy-goto-word-1)
-
-(defun my-avy-paste-word (char)
-   "Paste a word selected with avy"
-   (interactive (list (read-char "char:" t)))
-   (let ((avy-action 'my-copy-word))
-	   (avy--generic-jump (my-avy-regexp char) nil avy-style)
-	   (yank)))
-(defun my-copy-word (pt)
-	(save-excursion
-	(goto-char pt)
-	(kill-new (thing-at-point 'symbol))))
-(defun my-avy-regexp (c)
-   (concat
-   "\\b"
-   (string c)))
-(define-key global-map (kbd "C-M-j") 'my-avy-paste-word)
 #+END_SRC
 
 * Cargo

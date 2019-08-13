@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: hor
+# key: hor
+# --
+<View style={{ flexDirection: 'row' }}>
+	$0
+</View>

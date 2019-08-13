@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: styleprop
+# key: styleprop
+# --
+style?: StyleProp<ViewStyle$0>

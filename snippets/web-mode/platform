@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: platform
+# key: platform
+# --
+if (Platform.OS === '$1') {
+	$0
+}

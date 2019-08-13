@@ -991,3 +991,18 @@ pub global activate dart_language_server
 ;; Vterm is installed using git, so this has to be done by hand
 ;;(define-key vterm-mode-map (kbd "M-p") 'ace-window)
 #+END_SRC
+* Dedicated windows
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun toggle-window-dedicated ()
+  "Control whether or not Emacs is allowed to display another
+buffer in current window."
+  (interactive)
+  (message
+   (if (let (window (get-buffer-window (current-buffer)))
+         (set-window-dedicated-p window (not (window-dedicated-p window))))
+       "%s: Can't touch this!"
+     "%s is up for grabs.")
+   (current-buffer)))
+
+(global-set-key (kbd "C-c C-d") 'toggle-window-dedicated)
+#+END_SRC

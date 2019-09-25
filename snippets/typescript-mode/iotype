@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: iotype
+# key: iotype
+# --
+export type $1 = t.TypeOf<typeof $1>$0

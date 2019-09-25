@@ -725,6 +725,7 @@ _c_: Goto last change
 _e_: Error list
 _w_: Compilet
 _j_: Prettier
+_s_: Swap window
 _z_: Zig build
 _f_: Fit window
 _r_: Reload web mode
@@ -735,6 +736,7 @@ _t_: Vterm
   ("c" goto-last-change :exit nil)
   ("e" flycheck-list-errors)
   ("w" compile)
+  ("s" ace-swap-window)
   ("j" prettier-js)
   ("E" start-eshell-in-current-dir)
   ("b" magit-blame)

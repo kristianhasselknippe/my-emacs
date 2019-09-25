@@ -726,7 +726,7 @@ _e_: Error list
 _w_: Compilet
 _j_: Prettier
 _z_: Zig build
-_f_: Zig fmt
+_f_: Fit window
 _r_: Reload web mode
 _t_: Vterm
 "
@@ -740,9 +740,8 @@ _t_: Vterm
   ("b" magit-blame)
   ("t" vterm)
   ("z" zig-build)
-  ("f" zig-fmt)
-  ("r" web-mode-reload)
-)
+  ("f" fit-window-to-buffer)
+  ("r" web-mode-reload))
 
 (global-set-key (kbd "C-M-g") 'hydra-global/body)
 #+END_SRC

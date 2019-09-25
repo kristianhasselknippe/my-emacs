@@ -71,6 +71,9 @@ To switch between them. To to [[Package or straight]].
 #+BEGIN_SRC emacs-lisp :tangle yes
 (global-auto-revert-mode t)
 #+END_SRC
+* Flycheck
+#+BEGIN_SRC emacs-lisp :tangle yes
+#+END_SRC
 * Flymake
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package flymake)
@@ -302,6 +305,12 @@ To switch between them. To to [[Package or straight]].
 (use-package nodejs-repl)
 #+END_SRC
 
+* Lsp mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package lsp-mode)
+(require 'lsp-clients)
+;;(use-package lsp-rust)
+#+END_SRC
 * Rust
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -864,6 +873,7 @@ pub global activate dart_language_server
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package git-timemachine)
+(define-key global-map (kbd "M-M") 'git-timemachine)
 #+END_SRC
 * Org mode
 #+BEGIN_SRC emacs-lisp :tangle yes

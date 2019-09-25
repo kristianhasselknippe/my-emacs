@@ -18,3 +18,8 @@ quelpa
 straight
 .trello
 .lsp-session-v1
+session.*
+transient/
+tramp
+auto-save-list
+%backup%~

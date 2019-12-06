@@ -87,7 +87,7 @@
  '(org-clock-persist (quote clock))
  '(package-selected-packages
    (quote
-	(slack deadgrep ivy-posframe gradle-mode geiser racket-mode lsp-clients spinner abs-mode lsp-mode free-keys haskell-mode rjsx-mode hl-todo devdocs glsl-mode w3m helm-dash zig-mode multi-term company-flow flow-minor-mode powerline org-clock-today projectile-ripgrep dap-mode spotify magit-todos org-repo-todo org-ref flycheck org-jira which-key alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree expand-region wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
+	(ediprolog magit-gitflow slack deadgrep ivy-posframe gradle-mode geiser racket-mode lsp-clients spinner abs-mode lsp-mode free-keys haskell-mode rjsx-mode hl-todo devdocs glsl-mode w3m helm-dash zig-mode multi-term company-flow flow-minor-mode powerline org-clock-today projectile-ripgrep dap-mode spotify magit-todos org-repo-todo org-ref flycheck org-jira which-key alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree expand-region wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
  '(powerline-default-separator (quote wave))
  '(rg-command-line-flags nil)
  '(rg-executable rg)

@@ -108,6 +108,15 @@ To switch between them. To to [[Package or straight]].
 
 #+END_SRC
 
+** Magit-flow
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package magit-gitflow
+  :init
+  (setq magit-gitflow-popup-key "C-t")
+  :config
+  (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
+#+END_SRC
+
 * General and theme
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -632,7 +641,7 @@ The window scope is determined by `avy-all-windows' (ARG negates it)."
                          str2)))
            (regex (concat regex1 regex2)))
       (avy--generic-jump regex arg beg end))))
-(define-key global-map (kbd "C-j") 'avy-goto-word-2)
+(define-key global-map (kbd "C-j") 'avy-goto-word-1)
 #+END_SRC
 
 * Cargo
@@ -1048,4 +1057,9 @@ buffer in current window."
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package deadgrep)
 
+#+END_SRC
+* Prolog
+#+BEGIN_SRC emacs-lisp :tangle yes
+(autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
+(add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
 #+END_SRC

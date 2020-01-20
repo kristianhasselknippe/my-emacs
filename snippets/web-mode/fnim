@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Empty function impl
+# key: fnim
+# --
+() => {}

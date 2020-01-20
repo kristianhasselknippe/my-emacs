@@ -68,6 +68,7 @@
  '(js2-strict-missing-semi-warning nil)
  '(lsp-clients-dart-server-command "dart_language_server")
  '(lsp-clients-javascript-typescript-server "typescript-language-server")
+ '(lsp-dart-sdk-dir "~/dev/flutter/bin/cache/dart-sdk/")
  '(lsp-eldoc-render-all t)
  '(lsp-log-io nil)
  '(lsp-log-max 100000)
@@ -87,13 +88,25 @@
  '(org-clock-persist (quote clock))
  '(package-selected-packages
    (quote
-	(ediprolog magit-gitflow slack deadgrep ivy-posframe gradle-mode geiser racket-mode lsp-clients spinner abs-mode lsp-mode free-keys haskell-mode rjsx-mode hl-todo devdocs glsl-mode w3m helm-dash zig-mode multi-term company-flow flow-minor-mode powerline org-clock-today projectile-ripgrep dap-mode spotify magit-todos org-repo-todo org-ref flycheck org-jira which-key alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree expand-region wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
+	(smartparens flymd lsp-treemacs rainbow-mode dart-mode ediprolog magit-gitflow slack deadgrep ivy-posframe gradle-mode geiser racket-mode lsp-clients spinner lsp-mode free-keys haskell-mode rjsx-mode hl-todo devdocs glsl-mode w3m helm-dash zig-mode multi-term company-flow flow-minor-mode powerline org-clock-today projectile-ripgrep dap-mode spotify magit-todos org-repo-todo org-ref flycheck org-jira which-key alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap editorconfig tide multiple-cursors helm-projectile counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
  '(powerline-default-separator (quote wave))
+ '(prolog-program-name
+   (quote
+	(((getenv "EPROLOG")
+	  (eval
+	   (getenv "EPROLOG")))
+	 (eclipse "eclipse")
+	 (mercury nil)
+	 (sicstus "sicstus")
+	 (swi "swilgt")
+	 (gnu "gprolog")
+	 (t "swilgt"))))
  '(rg-command-line-flags nil)
  '(rg-executable rg)
  '(ring-bell-function (quote ignore))
  '(web-mode-auto-close-style 1)
  '(web-mode-enable-auto-expanding t)
+ '(web-mode-enable-auto-indentation nil)
  '(web-mode-enable-auto-opening nil)
  '(web-mode-enable-auto-quoting nil)
  '(whitespace-line-column 350)

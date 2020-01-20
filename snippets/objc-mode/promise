@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: promise
+# key: promise
+# --
+resolver:(RCTPromiseResolveBlock)resolve
+rejecter:(RCTPromiseRejectBlock)reject

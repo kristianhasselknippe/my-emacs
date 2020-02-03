@@ -512,6 +512,9 @@ To switch between them. To to [[Package or straight]].
 (use-package counsel)
 (global-set-key (kbd "C-M-s") 'counsel-rg)
 (global-set-key (kbd "C-M-f") 'rg-project)
+(global-set-key (kbd "C-M-i") 'counsel-imenu)
+(ivy-configure 'counsel-imenu
+  :update-fn 'auto)
 #+END_SRC
 
 * MacOS stuff
@@ -1067,9 +1070,4 @@ buffer in current window."
 #+BEGIN_SRC emacs-lisp :tangle yes
 (autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
 (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
-#+END_SRC
-* Smartparent
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package smartparens
-  :mode ("\\.ts\\'" "\\.tsx\\'" "\\.js\\'" "\\.jsx\\'" "\\.md\\'"))
 #+END_SRC

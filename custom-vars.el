@@ -87,13 +87,14 @@
  '(org-clock-persist (quote clock))
  '(package-selected-packages
    (quote
-	(ediprolog magit-gitflow slack deadgrep ivy-posframe gradle-mode geiser racket-mode lsp-clients spinner abs-mode lsp-mode free-keys haskell-mode rjsx-mode hl-todo devdocs glsl-mode w3m helm-dash zig-mode multi-term company-flow flow-minor-mode powerline org-clock-today projectile-ripgrep dap-mode spotify magit-todos org-repo-todo org-ref flycheck org-jira which-key alert htmlize swift-mode git-gutter dotnet dotnet-mode rg yasnippet hydra neotree expand-region wgrep ht monokai-theme calfw-org calfw yasnippet-snippets cargo avy-zap ace-window editorconfig tide multiple-cursors helm-projectile rainbow-mode counsel helm web-mode typescript-mode swiper omnisharp yaml-mode restclient eglot company-lsp nodejs-repl json-mode js2-mode undo-tree smex fsharp-mode company magit use-package)))
+	(multi-term alchemist elixir-mode org-repo-todo org-ref git-timemachine dart-mode elfeed prettier-js which-key alert swift-mode calfw-org calfw yasnippet-snippets yasnippet goto-chg hydra neotree expand-region cargo avy-zap editorconfig multiple-cursors helm-projectile yaml-mode web-mode use-package undo-tree tide smex rust-mode rg restclient rainbow-mode projectile omnisharp nodejs-repl monokai-theme magit json-mode js2-mode helm-git-grep helm git-gutter fsharp-mode flow-minor-mode dap-mode counsel company-lsp company-flow ace-window)))
  '(powerline-default-separator (quote wave))
  '(rg-command-line-flags nil)
  '(rg-executable rg)
  '(ring-bell-function (quote ignore))
  '(web-mode-auto-close-style 1)
  '(web-mode-enable-auto-expanding t)
+ '(web-mode-enable-auto-indentation nil)
  '(web-mode-enable-auto-opening nil)
  '(web-mode-enable-auto-quoting nil)
  '(whitespace-line-column 350)

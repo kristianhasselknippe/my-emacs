@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: noimpl
+# key: noimpl
+# --
+throw new Error('Not implemented')

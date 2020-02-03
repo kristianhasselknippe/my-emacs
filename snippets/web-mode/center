@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: center
+# key: center
+# --
+justifyContent: 'center',
+alignItems: 'center'

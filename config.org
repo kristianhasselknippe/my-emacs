@@ -205,8 +205,9 @@ To switch between them. To to [[Package or straight]].
 
 (use-package company
   :commands company-mode
-  :hook 
+  :hook
     ((typescript-mode . company-mode)
+	(lsp-mode . company-mode)
     (flow-minor-mode . company-mode)))
 
 (defun setup-company-mode ()
@@ -243,6 +244,11 @@ To switch between them. To to [[Package or straight]].
   (interactive)
   (shell-command-to-string "adb -d shell input keyevent 82"))
 #+END_SRC
+* Antlr mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package antlr-mode
+  :mode  "\\.g4\\'")
+#+END_SRC
 * Fsharp
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -270,7 +276,6 @@ To switch between them. To to [[Package or straight]].
 * Undo-tree
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-
 (use-package undo-tree
   :config (global-undo-tree-mode))
 
@@ -1062,4 +1067,9 @@ buffer in current window."
 #+BEGIN_SRC emacs-lisp :tangle yes
 (autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
 (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
+#+END_SRC
+* Smartparent
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package smartparens
+  :mode ("\\.ts\\'" "\\.tsx\\'" "\\.js\\'" "\\.jsx\\'" "\\.md\\'"))
 #+END_SRC
